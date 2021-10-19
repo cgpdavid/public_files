@@ -4,10 +4,12 @@
 #
 # USAGE (Local):   powershell.exe -ExecutionPolicy bypass ./cgp-choco-appinstall.ps1 -Packages 'googlechrome' 
 # DL+RUN (Universal): 
-#         powershell -exec bypass -c "(new-object net.webclient).DownloadFile('https://raw.githubusercontent.com/cgpdavid/public_files/main/cgp-choco-appinstall.ps1','cgp-choco-appinstall.ps1'); ./cgp-choco-appinstall.ps1 'vlc'"
+#         powershell -exec bypass -c "(new-object net.webclient).DownloadFile('https://raw.githubusercontent.com/cgpdavid/public_files/main/cgp-choco-appinstall.ps1','cgp-choco-appinstall.ps1'); ./cgp-choco-appinstall.ps1 'office365business'"
 #
-# Relevant/common packages: googlechrome, notepadplusplus, firefox, 7zip, sysinternals, adobereader, jre8, vlc, dotnetfx, microsoft-teams.install, office365business
-# Common cont.: zoom, dotnet3.5, dotnet4.5.2, dotnet4.6.1, vcredist2008, vcredist2010, vcredist2013, vcredist2017, dellcommandupdate, slack
+# Relevant/common packages: 
+# googlechrome, notepadplusplus, firefox, 7zip, sysinternals, adobereader, jre8, vlc, dotnetfx, microsoft-teams.install, office365business
+# zoom, dotnet3.5, dotnet4.5.2, dotnet4.6.1, vcredist2008, vcredist2010, vcredist2013, vcredist2017, dellcommandupdate, slack
+# 
 #
 # CGP:  googlechrome, firefox, 7zip, vlc, jre8, dotnetfx, office365business, microsoft-teams.install
 # CGP cont. : slack
@@ -61,7 +63,7 @@ trap
         Write-Host -Object "`nERROR: $message" -ForegroundColor Red
     }
 
-    Write-Host "`nThe Package failed to apply.`n"
+    Write-Host "`nThe artifact failed to apply.`n"
 
     # IMPORTANT NOTE: Throwing a terminating error (using $ErrorActionPreference = "Stop") still
     # returns exit code zero from the PowerShell script when using -File. The workaround is to
@@ -101,7 +103,7 @@ function Ensure-PowerShell
 
     if ($PSVersionTable.PSVersion.Major -lt $Version)
     {
-        throw "The current version of PowerShell is $($PSVersionTable.PSVersion.Major). Prior to running this installer, ensure you have PowerShell $Version or higher installed."
+        throw "The current version of PowerShell is $($PSVersionTable.PSVersion.Major). Prior to running this artifact, ensure you have PowerShell $Version or higher installed."
     }
 }
 
@@ -195,7 +197,7 @@ try
     Write-Host "Preparing to install Chocolatey packages: $Packages."
     Install-Packages -ChocoExePath "$choco" -Packages $Packages
 
-    Write-Host "`nThe Package was applied successfully.`n"
+    Write-Host "`nThe artifact was applied successfully.`n"
 }
 finally
 {
