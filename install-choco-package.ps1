@@ -3,7 +3,7 @@
 # Parameters to this script file.
 #
 # USAGE:   powershell.exe -ExecutionPolicy bypass ./install-choco-package.ps1 -Packages 'googlechrome' 
-# DL+RUN: powershell -exec bypass -c "(New-Object Net.WebClient).Proxy.Credentials=[Net.CredentialCache]::DefaultNetworkCredentials;iwr('https://raw.githubusercontent.com/xxxxxx.ps1')|iex"
+# DL+RUN: powershell -exec bypass -c "(New-Object Net.WebClient).Proxy.Credentials=[Net.CredentialCache]::DefaultNetworkCredentials;iwr('https://raw.githubusercontent.com/cgpdavid/public_files/main/install-choco-package.ps1')|iex"
 # Relevant/common packages: googlechrome, notepadplusplus, firefox, 7zip, sysinternals, adobereader, jre8, vlc, dotnetfx, microsoft-teams.install, office365business
 # Common cont.: zoom, dotnet3.5, dotnet4.5.2, dotnet4.6.1, vcredist2008, vcredist2010, vcredist2013, vcredist2017, dellcommandupdate, slack
 #
