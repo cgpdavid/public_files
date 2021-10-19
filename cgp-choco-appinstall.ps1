@@ -20,7 +20,7 @@ param(
     # Space-, comma- or semicolon-separated list of Chocolatey packages.
     [string] $Packages,
 
-    # Boolean indicating if we should allow empty checksums. Default to true to match previous artifact functionality despite security
+    # Boolean indicating if we should allow empty checksums. Default to true to match previous package functionality despite security
     [bool] $AllowEmptyChecksums = $true,
 
     # Boolean indicating if we should ignore checksums. Default to false for security
@@ -63,7 +63,7 @@ trap
         Write-Host -Object "`nERROR: $message" -ForegroundColor Red
     }
 
-    Write-Host "`nThe artifact failed to apply.`n"
+    Write-Host "`nThe package failed to apply.`n"
 
     # IMPORTANT NOTE: Throwing a terminating error (using $ErrorActionPreference = "Stop") still
     # returns exit code zero from the PowerShell script when using -File. The workaround is to
@@ -103,7 +103,7 @@ function Ensure-PowerShell
 
     if ($PSVersionTable.PSVersion.Major -lt $Version)
     {
-        throw "The current version of PowerShell is $($PSVersionTable.PSVersion.Major). Prior to running this artifact, ensure you have PowerShell $Version or higher installed."
+        throw "The current version of PowerShell is $($PSVersionTable.PSVersion.Major). Prior to running this package, ensure you have PowerShell $Version or higher installed."
     }
 }
 
@@ -197,7 +197,7 @@ try
     Write-Host "Preparing to install Chocolatey packages: $Packages."
     Install-Packages -ChocoExePath "$choco" -Packages $Packages
 
-    Write-Host "`nThe artifact was applied successfully.`n"
+    Write-Host "`nThe package was applied successfully.`n"
 }
 finally
 {
