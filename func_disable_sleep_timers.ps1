@@ -10,4 +10,3 @@ try {
 		$_.Exception.Message
 }
 }
-DisableSleepTimers
