@@ -25,3 +25,4 @@ Get-AppxPackage *MicrosoftOfficeHub* | Remove-AppxPackage
 write-host "Removing OneNote tile from startmenu"
 Get-AppxPackage *OneNote* | Remove-AppxPackage
 }
+RemoveStock365
