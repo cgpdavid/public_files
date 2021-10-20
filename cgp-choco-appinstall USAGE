@@ -1,0 +1,15 @@
+Could not edit actual script as it is signed.
+powershell -exec bypass -c "(new-object net.webclient).DownloadFile('https://raw.githubusercontent.com/cgpdavid/public_files/main/cgp-choco-appinstall.ps1','cgp-choco-appinstall.ps1'); ./cgp-choco-appinstall.ps1; choco install 7zip, vlc, --pre --yes"
+
+Syntax:
+--Pre = Install Pre-release packages, will give you the most up to date. Might not be Chocolately Moderator approved yet.
+--yes = Do not prompt, default accept. "Unattended"
+
+
+Relevant packages
+CGP Stack:
+googlechrome, firefox, 7zip, vlc, jre8, dotnetfx, office365business, microsoft-teams.install, slack
+
+Additional:
+googlechrome, notepadplusplus, firefox, 7zip, sysinternals, adobereader, jre8, vlc, dotnetfx, microsoft-teams.install, office365business
+zoom, dotnet3.5, dotnet4.5.2, dotnet4.6.1, vcredist2008, vcredist2010, vcredist2013, vcredist2017, dellcommandupdate, slack
