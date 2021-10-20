@@ -5,6 +5,42 @@
 #
 
 # Functions
+
+function CheckAndCreateITSFolders {
+	try {
+		if (!(Test-Path "C:\itsupport\installers\")){
+		Write-Host "Creating Installers directory"
+		New-Item -Path "C:\itsupport\" -Name "Installers" -ItemType "directory"
+		}
+		else {
+		Write-Host "Installers path exists"
+		}
+
+
+
+		if (!(Test-Path "C:\itsupport\temp\")){
+			Write-Host "Creating Temp directory"
+			New-Item -Path "C:\itsupport\" -Name "temp" -ItemType "directory"
+		}
+		else {
+			Write-Host "Temporary Path exists"
+		}
+
+		if (!(Test-Path "C:\itsupport\logs\")){
+            Write-Host "Creating Logs directory"
+			New-Item -Path "C:\itsupport\" -Name "logs" -ItemType "directory"
+		}
+		else {
+			Write-Host "Logs Path exists"
+		}
+	}
+
+	catch {
+		write-host "ERROR!" -ForegroundColor Red
+		$_.Exception.Message
+	}
+}
+
 function waitForProcessToStartOrTimeout( [string]$procname, [int]$timeoutvalue ) {
     # Takes process name (without exe) and time value in seconds, waits until process starts or timesout
         [int]$waittries = 0
@@ -47,6 +83,7 @@ if ( Test-Path "c:\itsupport\installers\mcpr.exe" ) {
 	Write-Output "Downloading McAfee Removal Tool..." | Out-Default
 	$url = "http://us.mcafee.com/apps/supporttools/mcpr/mcpr.asp"
 	$output = "c:\itsupport\installers\mcpr.exe"
+	CheckAndCreateITSFolders
 	New-Item -Path "c:\itsupport\" -Name "installers" -ItemType "directory" | Out-Null
 	$ProgressPreference = "silentlyContinue"
 	Invoke-WebRequest -Uri $url -OutFile $output
