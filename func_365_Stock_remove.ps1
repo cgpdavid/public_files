@@ -41,4 +41,3 @@ if (Test-Path $fileToCheck -PathType leaf)
 
 }
 }
-RemoveStock365
