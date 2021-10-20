@@ -24,5 +24,21 @@ Get-AppxPackage *MicrosoftOfficeHub* | Remove-AppxPackage
 
 write-host "Removing OneNote tile from startmenu"
 Get-AppxPackage *OneNote* | Remove-AppxPackage
+
+
+#Attempt uninstall of bundled 365 installs
+Write-Host "Attempting automated uninstall of 365 C2R apps"
+write-host "Checking if bloat c2r installers exist"
+$fileToCheck = "C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeClickToRun.exe"
+if (Test-Path $fileToCheck -PathType leaf)
+{
+	Write-Host "Manually Removing bundled 365 en-us"
+		Start-Process "C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeClickToRun.exe" -ArgumentList "scenario=install   scenariosubtype=ARP sourcetype=None productstoremove=O365HomePremRetail.16_en-us_x-none culture=en-us version.16=16.0 DisplayLevel=false" -EA SilentlyContinue -wait
+		Write-Host "Manually Removing bundled 365 es-es"
+		Start-Process "C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeClickToRun.exe" -ArgumentList "scenario=install   scenariosubtype=ARP sourcetype=None productstoremove=O365HomePremRetail.16_es-es_x-none culture=es-es version.16=16.0 DisplayLevel=false" -EA SilentlyContinue -wait
+		Write-Host "Manually Removing bundled 365 fr-fr"
+		Start-Process "C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeClickToRun.exe" -ArgumentList "scenario=install   scenariosubtype=ARP sourcetype=None productstoremove=O365HomePremRetail.16_fr-fr_x-none culture=fr-fr version.16=16.0 DisplayLevel=false" -EA SilentlyContinue -wait
+
+}
 }
 RemoveStock365
