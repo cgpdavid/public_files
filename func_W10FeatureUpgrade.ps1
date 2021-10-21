@@ -32,5 +32,7 @@ try {
 		write-host "ERROR!" -ForegroundColor Red
 		$_.Exception.Message
 }
+write-host "sleeping for 5 seconds"
+Start-Sleep -s 5
 Remove-Item "C:\users\*\Desktop\Windows 10 Update Assistant.lnk" –Force -erroraction silentlycontinue
 }
