@@ -1,11 +1,14 @@
+#usage RenamePcXXXPrefix($ClientHostnamePrefix="test")
+#usage RenamePcXXXPrefix($ClientHostnamePrefix=$VarFromScript)
+function RenamePcXXXPrefix {
 param (
+    [CmdletBinding()]
     [Parameter(Position=0,mandatory=$true)]
-    [string]$ClientHostnamePrefix,
+    [string]$ClientHostnamePrefix
 )
 if(-not($ClientHostnamePrefix)) { Throw “ClientHostnamePrefix has not been defined! for -ClientHostnamePrefix” }
 
-function RenamePcXXXPrefix {
-write-host "Prefix detected was: " ClientHostnamePrefix
+write-host "Prefix detected was: " $ClientHostnamePrefix
 #must set  to "xxx"
 $ServiceTAG = (Get-WmiObject Win32_BIOS).serialnumber
 $OLDNAME    = (Get-WmiObject win32_COMPUTERSYSTEM).Name
