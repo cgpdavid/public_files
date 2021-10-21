@@ -14,19 +14,7 @@ if (Test-Path -Path $fileToCheck -PathType leaf)
 	write-host "VPN Description variable set to " $VPNdescription
 	write-host "VPN Server Address variable set to " $VPNserverAddress
 	
-		#Write Config to registry
-		if((Test-Path -LiteralPath "HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels") -ne $true) {  New-Item "HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels" -force -ea SilentlyContinue };
-		if((Test-Path -LiteralPath "HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName") -ne $true) {  New-Item "HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName" -force -ea SilentlyContinue };
-		New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'Description' -Value $VPNdescription -PropertyType String -Force -ea SilentlyContinue;
-		New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'Server' -Value $VPNserverAddress -PropertyType String -Force -ea SilentlyContinue;
-		New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'promptusername' -Value 1 -PropertyType DWord -Force -ea SilentlyContinue;
-		New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'promptcertificate' -Value 0 -PropertyType DWord -Force -ea SilentlyContinue;
-		New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'DATA3' -Value '' -PropertyType String -Force -ea SilentlyContinue;
-		New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'ServerCert' -Value '1' -PropertyType String -Force -ea SilentlyContinue;
-		New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'dual_stack' -Value 0 -PropertyType DWord -Force -ea SilentlyContinue;
-		New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'sso_enabled' -Value 0 -PropertyType DWord -Force -ea SilentlyContinue;
-		New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'use_external_browser' -Value 0 -PropertyType DWord -Force -ea SilentlyContinue;
-}
+	}
 else {
 	write-host "Forticlient not detected - skipping config import" -ForegroundColor yellow
 }
