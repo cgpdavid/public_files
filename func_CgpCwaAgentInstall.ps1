@@ -1,14 +1,16 @@
 function CgpCwaAgentInstall {
 
 param (
-    [CmdletBinding()]
-    [Parameter(Position=0,mandatory=$true)]
+    [parameter(Mandatory=$true)]
     [string]$CgpAgentUrl,
-	[Parameter(Position=1,mandatory=$true)]
+
+    [parameter(Mandatory=$true)]
     [string]$CwaClientLocationID,
-	[Parameter(Position=2,mandatory=$true)]
+
+    [parameter(Mandatory=$true)]
     [string]$CgpCwaServerAddress,
-	[Parameter(Position=3,mandatory=$true)]
+
+    [parameter(Mandatory=$true)]
     [string]$CgpCwaServerPwd
 )
 
