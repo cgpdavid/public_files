@@ -1,28 +1,9 @@
 function CgpCwaAgentInstall {
 
-param (
-    [parameter(Mandatory=$true)]
-    [string]$CgpAgentUrl,
-
-    [parameter(Mandatory=$true)]
-    [string]$CwaClientLocationID,
-
-    [parameter(Mandatory=$true)]
-    [string]$CgpCwaServerAddress,
-
-    [parameter(Mandatory=$true)]
-    [string]$CgpCwaServerPwd
-)
-
-if(-not($CgpAgentUrl)) { Throw “CgpAgentUrl has not been defined! for -CgpAgentUrl” }
-if(-not($CwaClientLocationID)) { Throw “CwaClientLocationID has not been defined! for -CwaClientLocationID” }
-if(-not($CgpCwaServerAddress)) { Throw “CgpCwaServerAddress has not been defined! for -CgpCwaServerAddress” }
-if(-not($CgpCwaServerPwd)) { Throw “CgpCwaServerPwd has not been defined! for -CgpCwaServerPwd” }
-
-Write-host "Read value for CgpAgentUrl: " $CgpAgentUrl
-Write-host "Read value for CwaClientLocationID: " $CwaClientLocationID
-Write-host "Read value for CgpCwaServerAddress: " $CgpCwaServerAddress
-Write-host "Read value for CgpCwaServerPwd: " $CgpCwaServerPwd
+$CgpAgentUrl = (read-host "What is the CgpAgentUrl: ")
+$CwaClientLocationID = (read-host "What is the CwaClientLocationID: ")
+$CgpCwaServerAddress= (read-host "What is the CgpCwaServerAddress: ")
+$CgpCwaServerPwd= (read-host "What is the CgpCwaServerPwd: ")
 
 # NOTICE! must set $CgpAgentUrl, $CwaClientLocationID , $CgpCwaServerAddress, and $CgpCwaServerPwd
 try {
