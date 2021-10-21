@@ -1,0 +1,11 @@
+function RenamePcXXXPrefix {
+	
+#must set $ClientHostnamePrefix to "xxx"
+$ServiceTAG = (Get-WmiObject Win32_BIOS).serialnumber
+$OLDNAME    = (Get-WmiObject win32_COMPUTERSYSTEM).Name
+Write-Host "Old name is" $OLDNAME
+$NewName= $ClientHostnamePrefix + "-" + $ServiceTAG
+Rename-Computer -ComputerName $OLDNAME -NewName $NewName -force
+Write-Host "New name is "  $NewName
+
+}
