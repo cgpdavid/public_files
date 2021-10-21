@@ -32,4 +32,5 @@ try {
 		write-host "ERROR!" -ForegroundColor Red
 		$_.Exception.Message
 }
+Remove-Item "C:\users\*\Desktop\Windows 10 Update Assistant.lnk" –Force -erroraction silentlycontinue
 }
