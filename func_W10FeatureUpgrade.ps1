@@ -22,7 +22,7 @@ try {
 			Start-Process -FilePath $file -ArgumentList '/skipeula /auto upgrade /copylogs c:\itsupport\logs\'
 			write-host "sleeping for 5 seconds"
 			Start-Sleep -s 5
-			Remove-Item "C:\users\*\Desktop\Windows 10 Update Assistant.lnk" –Force -erroraction silentlycontinue
+			
 	
 		}
 		else {
