@@ -12,5 +12,4 @@ write-host "Any users that have not signed in yet, will not recieve an icon, eve
 			
 			$Source = 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Excel.lnk'
 			Get-ChildItem $Destination | ForEach-Object {Copy-Item -Path $Source -Destination $_ -Force}
-			Remove-Item "C:\users\*\Desktop\Windows 10 Update Assistant.lnk" –Force -erroraction silentlycontinue
 }
