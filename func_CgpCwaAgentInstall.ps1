@@ -1,6 +1,24 @@
 function CgpCwaAgentInstall {
-# Download and Install CGP AGENT into SVP CWA Site - 
-# NOTICE! must set $CwaClientSiteID , $CgpAgentUrl, $CgpServerAddress, and $CgpCwaServerPwd
+
+param (
+    [CmdletBinding()]
+    [Parameter(Position=0,mandatory=$true)]
+    [string]$CgpAgentUrl
+	[Parameter(Position=1,mandatory=$true)]
+    [string]$CwaClientLocationID
+	[Parameter(Position=2,mandatory=$true)]
+    [string]$CgpCwaServerAddress
+	[Parameter(Position=3,mandatory=$true)]
+    [string]$CgpCwaServerPwd
+)
+
+if(-not($CgpAgentUrl)) { Throw “CgpAgentUrl has not been defined! for -CgpAgentUrl” }
+if(-not($CwaClientLocationID)) { Throw “CwaClientLocationID has not been defined! for -CwaClientLocationID” }
+if(-not($CgpCwaServerAddress)) { Throw “CgpCwaServerAddress has not been defined! for -CgpCwaServerAddress” }
+if(-not($CgpCwaServerPwd)) { Throw “CgpCwaServerPwd has not been defined! for -CgpCwaServerPwd” }
+
+
+# NOTICE! must set $CgpAgentUrl, $CwaClientLocationID , $CgpCwaServerAddress, and $CgpCwaServerPwd
 try {
 		write-host "Downloading CGP Agent"
 		#-Download agent from CWA Server
