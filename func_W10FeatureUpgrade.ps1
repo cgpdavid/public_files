@@ -20,9 +20,6 @@ try {
 		{
 			write-host "Launching windows 10 feature upgrade"
 			Start-Process -FilePath $file -ArgumentList '/skipeula /auto upgrade /copylogs c:\itsupport\logs\'
-			write-host "sleeping for 5 seconds"
-			Start-Sleep -s 5
-			
 	
 		}
 		else {
