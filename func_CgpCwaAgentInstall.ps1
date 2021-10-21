@@ -13,7 +13,7 @@ try {
 		write-host "sleeping for 5 seconds"
 		Start-Sleep -s 5
 		write-host "Installing CGP Agent"
-		$ArgumentList = '/I "C:\itsupport\installers\Agent_Install.MSI" /quiet /norestart /L*V! C:\itsupport\logs\cgp_agent_install_log.txt SERVERADDRESS=$CgpCwaServerAddress SERVERPASS=$CgpCwaServerPwd LOCATION=$CwaClientSiteID'
+		$ArgumentList = '/I "C:\itsupport\installers\Agent_Install.MSI" /quiet /norestart /L*V! C:\itsupport\logs\cgp_agent_install_log.txt SERVERADDRESS=$CgpCwaServerAddress SERVERPASS=$CgpCwaServerPwd LOCATION=$CwaClientLocationID'
 		Start-Process msiexec.exe -Wait -ArgumentList $ArgumentList
 		write-host "Installer exited. Sleeping for 30 seconds."
 		Start-Sleep -s 30
