@@ -19,6 +19,6 @@ if(-not($DomainJoinDomain)) { Throw “DomainJoinDomain has not been defined! fo
 		Write-Verbose "Attempting to Join the domain now - prompting your for domain and credentials"
 		Write-host "Joining the domain:" $DomainJoinDomain
 		write-host "Will Prompt you for credentials"
-		add-computer –domainname $DomainJoinDomain –force
+		add-computer -domainname $DomainJoinDomain -force
 	}
 }
