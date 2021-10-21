@@ -1,4 +1,6 @@
+write-host "Test before function call"
 function CheckAndCreateITSFolders {
+write-host "Test AFTER function call"
 	try {
 		if (!(Test-Path "C:\itsupport\installers\")){
 		Write-Host "Creating Installers directory"
