@@ -17,6 +17,10 @@ if(-not($CwaClientLocationID)) { Throw “CwaClientLocationID has not been defin
 if(-not($CgpCwaServerAddress)) { Throw “CgpCwaServerAddress has not been defined! for -CgpCwaServerAddress” }
 if(-not($CgpCwaServerPwd)) { Throw “CgpCwaServerPwd has not been defined! for -CgpCwaServerPwd” }
 
+Write-host "Read value for CgpAgentUrl: " $CgpAgentUrl
+Write-host "Read value for CwaClientLocationID: " $CwaClientLocationID
+Write-host "Read value for CgpCwaServerAddress: " $CgpCwaServerAddress
+Write-host "Read value for CgpCwaServerPwd: " $CgpCwaServerPwd
 
 # NOTICE! must set $CgpAgentUrl, $CwaClientLocationID , $CgpCwaServerAddress, and $CgpCwaServerPwd
 try {
