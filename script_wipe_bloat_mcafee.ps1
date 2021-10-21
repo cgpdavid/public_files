@@ -1,7 +1,7 @@
 # 
 # Author: CGP David
 # Usage: 
-# powershell -exec bypass -c "(new-object net.webclient).DownloadFile('https://github.com/cgpdavid/public_files/blob/main/script_wipe_bloat_mcafee.ps1','script_wipe_bloat_mcafee.ps1'); ./script_wipe_bloat_mcafee.ps1"
+# powershell -exec bypass -c "(new-object net.webclient).DownloadFile('https://raw.githubusercontent.com/cgpdavid/public_files/main/script_wipe_bloat_mcafee.ps1','script_wipe_bloat_mcafee.ps1'); ./script_wipe_bloat_mcafee.ps1"
 #
 
 # Functions
