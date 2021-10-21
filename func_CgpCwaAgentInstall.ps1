@@ -4,7 +4,10 @@ $CgpAgentUrl = (read-host "What is the CgpAgentUrl: ")
 $CwaClientLocationID = (read-host "What is the CwaClientLocationID: ")
 $CgpCwaServerAddress= (read-host "What is the CgpCwaServerAddress: ")
 $CgpCwaServerPwd= (read-host "What is the CgpCwaServerPwd: ")
-
+Write-host "Read value for CgpAgentUrl: " $CgpAgentUrl
+Write-host "Read value for CwaClientLocationID: " $CwaClientLocationID
+Write-host "Read value for CgpCwaServerAddress: " $CgpCwaServerAddress
+Write-host "Read value for CgpCwaServerPwd: " $CgpCwaServerPwd
 # NOTICE! must set $CgpAgentUrl, $CwaClientLocationID , $CgpCwaServerAddress, and $CgpCwaServerPwd
 try {
 		write-host "Downloading CGP Agent"
