@@ -1,5 +1,5 @@
 function RenamePcXXXPrefix {
-	
+write-host "Prefix detected was: " ClientHostnamePrefix
 #must set $ClientHostnamePrefix to "xxx"
 $ServiceTAG = (Get-WmiObject Win32_BIOS).serialnumber
 $OLDNAME    = (Get-WmiObject win32_COMPUTERSYSTEM).Name
