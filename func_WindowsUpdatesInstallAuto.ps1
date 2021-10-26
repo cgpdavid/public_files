@@ -1,7 +1,6 @@
 function WindowsUpdatesInstallAuto {
 try {
 		write-host "Setting up windows updates powershell modules"
-		Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -force
 		Install-PackageProvider -Name NuGet -RequiredVersion 2.8.5.201 -Force
 		Install-Module PSWindowsUpdate -force
 		write-host "Checking for and Installing windows updates - This might take a while"
