@@ -1,4 +1,11 @@
 Function DellDcuUpdate {
+
+#CheckAndCreateITSFolders
+	remove-item $env:TEMP\func_CheckAndCreateITSFolders.ps1 -erroraction silentlycontinue
+	powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_CheckAndCreateITSFolders.ps1 -OutFile $env:TEMP\func_CheckAndCreateITSFolders.ps1"
+	powershell -exec bypass -c ". $env:TEMP\func_CheckAndCreateITSFolders.ps1; CheckAndCreateITSFolders"
+	
+
 if (Get-WmiObject win32_SystemEnclosure -Filter: "Manufacturer LIKE 'Dell Inc.'") { 
     $isDellSystem = $true
     Write-Host "This computer is a Dell"
@@ -22,6 +29,34 @@ if (Get-WmiObject win32_SystemEnclosure -Filter: "Manufacturer LIKE 'Dell Inc.'"
 				Start-Process "C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe" -ArgumentList "/applyUpdates -reboot=disable -outputLog=C:\itsupport\logs\applyUpdates.log" -Wait
 		}else {
 			write-host "We could not locate dell command update!" -ForegroundColor Red
+            if ($DcuInstallAttempt -eq $null) {
+			
+			write-host "Installing Dell Command Update"
+			# Choco Install Basic Packages
+			remove-item c:\itsupport\scripts\cgp-choco-appinstall.ps1 -erroraction silentlycontinue
+			powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/cgp-choco-appinstall.ps1 -OutFile c:\itsupport\scripts\cgp-choco-appinstall.ps1; c:\itsupport\scripts\cgp-choco-appinstall.ps1"
+			SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+			C:\ProgramData\chocolatey\bin\choco install dellcommandupdate --pre --yes
+			$DcuInstallAttempt = $true
+			
+			#LaunchDCU
+			DellDcuUpdate
+			
+			if ($DcuInstallAttempt -eq $true) {
+				write-error "Error! We tried to install DCU but it failed"
+                write-host "This might be a Dell XPS, Alienware, Inspiron, Vostro, etc system"
+				write-host "It likely has Dell Update installed (Not Dell Command Update)"
+                write-host "Which are incompatible."
+				
+			
+			} else {
+				write-error "Error!"
+				
+			}
+			
+
+		}
+
 		}
 		}
 
