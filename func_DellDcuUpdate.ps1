@@ -11,8 +11,7 @@ if (Get-WmiObject win32_SystemEnclosure -Filter: "Manufacturer LIKE 'Dell Inc.'"
 			Start-Process "C:\Program Files\Dell\CommandUpdate\dcu-cli.exe" -ArgumentList "/configure -silent -autoSuspendBitLocker=enable -userConsent=disable" -Wait
 			Start-Process "C:\Program Files\Dell\CommandUpdate\dcu-cli.exe" -ArgumentList "/scan -outputLog=C:\itsupport\logs\Dell_DCU_Update_log.log" -Wait
 			Start-Process "C:\Program Files\Dell\CommandUpdate\dcu-cli.exe" -ArgumentList "/applyUpdates -reboot=disable -outputLog=C:\itsupport\logs\applyUpdates.log" -Wait
-		}
-		else {
+		}else {
 			write-host "Dell Command Update not installed in Program Files, checking  Program Files (x86)"
 			$fileToCheck = "C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe"
 			if (Test-Path $fileToCheck -PathType leaf){
@@ -21,14 +20,12 @@ if (Get-WmiObject win32_SystemEnclosure -Filter: "Manufacturer LIKE 'Dell Inc.'"
 				Start-Process "C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe" -ArgumentList "/configure -silent -autoSuspendBitLocker=enable -userConsent=disable" -Wait
 				Start-Process "C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe" -ArgumentList "/scan -outputLog=C:\itsupport\logs\Dell_DCU_Update_log.log" -Wait
 				Start-Process "C:\Program Files (x86)\Dell\CommandUpdate\dcu-cli.exe" -ArgumentList "/applyUpdates -reboot=disable -outputLog=C:\itsupport\logs\applyUpdates.log" -Wait
-		}
-		else {
+		}else {
 			write-host "We could not locate dell command update!" -ForegroundColor Red
 		}
 		}
 
-    } 
-	else { 
+    } else { 
     $manufacturer = $(Get-WmiObject win32_SystemEnclosure | Select-Object Manufacturer)
     Write-Host "This system could not be identified as Dell system - Found manufacturer: $manufacturer" 
 }
