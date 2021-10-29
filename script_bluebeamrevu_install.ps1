@@ -1,8 +1,11 @@
 
 function CheckIfRunningAsAdmin {
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]"Administrator")) {
-    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    write-host "MUST BE RUN AS ADMIN - Exiting in 10 seconds!" -ForegroundColor RED
+	sleep 10
     Exit
+}elseif (([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]"Administrator")) {
+	write-host "This script is running as administrator!" -ForegroundColor GREEN
 }
 }
 CheckIfRunningAsAdmin
