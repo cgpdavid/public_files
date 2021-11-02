@@ -26,12 +26,67 @@ function func_check_for_reboot_required {
         $result = Invoke-Command -ScriptBlock $test.Test
         if ($test.TestType -eq 'ValueExists' -and $result) {
             write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! A reboot is Pending/Required, and MUST reboot to continue. WARNING!" -ForegroundColor RED
 			write-host $test.Name
 			sleep 10
 			exit 3010	
 			$varRebootRequired = $true
         } elseif ($test.TestType -eq 'NonNullValue' -and $result -and $result.($test.Name)) {
             write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
+			
 			$varRebootRequired = $true
 			sleep 10
 			exit 3010
