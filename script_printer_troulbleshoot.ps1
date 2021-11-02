@@ -1,7 +1,12 @@
+<#
 #USAGE
-#remove-item $env:TEMP\script_printer_troulbleshoot.ps1 -erroraction silentlycontinue
-#powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/script_printer_troulbleshoot.ps1 -OutFile $env:TEMP\script_printer_troulbleshoot.ps1"
-#powershell -exec bypass -c ". $env:TEMP\script_printer_troulbleshoot.ps1"
+
+#script_printer_troulbleshoot
+remove-item $env:TEMP\script_printer_troulbleshoot.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/script_printer_troulbleshoot.ps1 -OutFile $env:TEMP\script_printer_troulbleshoot.ps1"
+powershell -exec bypass -c ". $env:TEMP\script_printer_troulbleshoot.ps1"
+
+#>
 
 
 
