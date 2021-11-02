@@ -1,5 +1,9 @@
-function CgpCwaAgentInstall {
+# Currently broken do not use
 
+function CgpCwaAgentInstall {
+write-host "THIS IS CURRENTLY BROKEN DO NOT USE"
+write-host "THIS IS CURRENTLY BROKEN DO NOT USE"
+write-host "THIS IS CURRENTLY BROKEN DO NOT USE"
 $CgpAgentUrl = (read-host "What is the CgpAgentUrl: ")
 $CwaClientLocationID = (read-host "What is the CwaClientLocationID: ")
 $CgpCwaServerAddress= (read-host "What is the CgpCwaServerAddress: ")
