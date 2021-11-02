@@ -95,9 +95,9 @@ RemoveMcAfee
 function RemoveMcAfeeAppPackages {
 	Write-Output "Removing McAfee Windows Tiles and Apps" | Out-Default
 	$RemoveApp = 'Mcafee'
-	Get-AppxPackage -AllUsers | Where-Object {$_.Name -Match $RemoveApp} | Remove-AppxPackage
-	Get-AppxPackage | Where-Object {$_.Name -Match $RemoveApp} | Remove-AppxPackage
-	Get-AppxProvisionedPackage -Online | Where-Object {$_.PackageName -Match $RemoveApp} | Remove-AppxProvisionedPackage -Online
+	Get-AppxPackage -AllUsers | Where-Object {$_.Name -Match $RemoveApp} | Remove-AppxPackage -AllUsers
+	Get-AppxPackage | Where-Object {$_.Name -Match $RemoveApp} | Remove-AppxPackage -AllUsers
+	Get-AppxProvisionedPackage -Online | Where-Object {$_.PackageName -Match $RemoveApp} | Remove-AppxProvisionedPackage -Online -AllUsers
 	
 	
 }
