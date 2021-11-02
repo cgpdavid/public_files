@@ -35,6 +35,7 @@ CheckIfRunningAsAdmin
 $askClearPrintJobs=Read-Host "Would you like to clear Stuck printjobs? (Y/N)"
 $askPrintNightmare=Read-Host "Would you like to bypass PrintNightmare? (Y/N)"
 $askBypassMsKB=Read-Host "Would you like to bypass Microsoft printing as admin KB5005033? (Y/N)"
+$askGpupdate=Read-Host "Would you like to gpupdate /force as the last step? (Y/N)"
 
 
 
@@ -75,6 +76,26 @@ If ((Get-Service spooler).status -eq 'Stopped')
 
 write-host "DONE!"
 }
+
+If ($askGpupdate -eq 'Y'){
+Write-Host 'Forcing GPUPDATE as admin!' -ForegroundColor Green
+gpupdate /force
+
+Write-Host 'Forcing GPUPDATE as logged on user!' -ForegroundColor Green
+$ArgumentList = "/k gpupdate /force & exit"
+$apppath = "cmd.exe" 
+$taskname = "Launch $apppath"
+$action = New-ScheduledTaskAction -Execute $apppath -Argument $ArgumentList
+write-host $action 
+$trigger = New-ScheduledTaskTrigger -Once -At (Get-Date)
+Register-ScheduledTask -Action $action -Trigger $trigger -TaskName $taskname | Out-Null
+Start-ScheduledTask -TaskName $taskname
+Start-Sleep -s 1
+Unregister-ScheduledTask -TaskName $taskname -Confirm:$false
+
+}
+write-host "Launching Printers Control Panel then exiting!"
+control printers
 '================================================================='
 ''
 write-host "Exiting!"
