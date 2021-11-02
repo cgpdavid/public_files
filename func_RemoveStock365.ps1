@@ -20,10 +20,10 @@ Get-Process -Name 'setup.exe','firstrun.exe','appvshnotify.exe','Officeclicktoru
 
 #Delete office tiles in start menu
 write-host "Removing Office tile from startmenu"
-Get-AppxPackage *MicrosoftOfficeHub* | Remove-AppxPackage
+Get-AppxPackage *MicrosoftOfficeHub* | Remove-AppxPackage -AllUsers
 
 write-host "Removing OneNote tile from startmenu"
-Get-AppxPackage *OneNote* | Remove-AppxPackage
+Get-AppxPackage *OneNote* | Remove-AppxPackage -AllUsers
 
 
 #Attempt uninstall of bundled 365 installs
