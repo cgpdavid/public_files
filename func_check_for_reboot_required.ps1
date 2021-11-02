@@ -32,7 +32,7 @@ function func_check_for_reboot_required {
             write-host "WARNING! The computer has a Pending File Rename Operation, and MUST reboot to continue. WARNING!" -ForegroundColor RED
 			$varRebootRequired = $true
         } else {
-            write-host "Reboot not requred Required at this time due to " $test.Name
+            write-host "Reboot not requred Required at this time due to " $test.Name -ForegroundColor Green
         }
     }
 }
