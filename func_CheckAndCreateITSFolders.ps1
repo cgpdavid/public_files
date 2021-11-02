@@ -1,3 +1,14 @@
+<#
+#USAGE
+
+#CheckAndCreateITSFolders
+remove-item $env:TEMP\func_CheckAndCreateITSFolders.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_CheckAndCreateITSFolders.ps1 -OutFile $env:TEMP\func_CheckAndCreateITSFolders.ps1"
+powershell -exec bypass -c ". $env:TEMP\func_CheckAndCreateITSFolders.ps1; CheckAndCreateITSFolders"
+
+#>
+
+
 function CheckAndCreateITSFolders {
 	try {
 		if (!(Test-Path "C:\itsupport\installers\")){
