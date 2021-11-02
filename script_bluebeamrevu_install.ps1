@@ -1,4 +1,10 @@
 
+<#
+BUGS:
+stopping BBPrint.exe if not exists throws error 
+
+#>
+
 function CheckIfRunningAsAdmin {
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]"Administrator")) {
     write-host "MUST BE RUN AS ADMIN - Exiting in 10 seconds!" -ForegroundColor RED
@@ -12,6 +18,15 @@ CheckIfRunningAsAdmin
 
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted -force
 
+#func_check_for_reboot_required 
+write-host "WARNING! This script will exit if it detects that a reboot is pending!"  -ForegroundColor yellow
+write-host "WARNING! This script will exit if it detects that a reboot is pending!"  -ForegroundColor yellow
+write-host "WARNING! This script will exit if it detects that a reboot is pending!"  -ForegroundColor yellow
+write-host "WARNING! This script will exit if it detects that a reboot is pending!"  -ForegroundColor yellow
+write-host "WARNING! This script will exit if it detects that a reboot is pending!"  -ForegroundColor yellow
+remove-item c:\itsupport\scripts\func_check_for_reboot_required.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_check_for_reboot_required.ps1 -OutFile c:\itsupport\scripts\func_check_for_reboot_required.ps1"
+powershell -exec bypass -c ". c:\itsupport\scripts\func_check_for_reboot_required.ps1; func_check_for_reboot_required"
 
 #BLUEBEAM 
 remove-item $env:TEMP\func_CheckAndCreateITSFolders.ps1 -erroraction silentlycontinue
