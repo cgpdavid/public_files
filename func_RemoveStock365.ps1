@@ -19,8 +19,8 @@ write-host "It will likely say some dont exist - this is fine. continue"
 Get-Process -Name 'setup.exe','firstrun.exe','appvshnotify.exe','Officeclicktorun.exe' | Stop-Process -Force -ErrorAction SilentlyContinue
 
 #Delete office tiles in start menu
-Get-appxpackage -allusers *Microsoft.MicrosoftOfficeHub* | Remove-AppxPackage -allusers
-Get-appxprovisionedpackage –online | where-object {$_.packagename –like '*Microsoft.MicrosoftOfficeHub*'} | remove-appxprovisionedpackage –online
+Get-appxpackage -allusers *Microsoft.MicrosoftOfficeHub* -allusers | Remove-AppxPackage -allusers
+Get-appxprovisionedpackage –online | where-object {$_.packagename –like '*Microsoft.MicrosoftOfficeHub*'} | remove-appxprovisionedpackage –online -allusers
 Get-appxpackage -allusers *onenote* | Remove-AppxPackage -allusers
 Get-appxprovisionedpackage –online | where-object {$_.packagename –like '*onenote*'} | remove-appxprovisionedpackage –online -allusers
 
