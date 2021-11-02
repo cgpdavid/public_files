@@ -1,0 +1,20 @@
+<#
+#USAGE
+
+#ChocoAppInstall
+remove-item c:\itsupport\scripts\cgp-choco-appinstall.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/cgp-choco-appinstall.ps1 -OutFile c:\itsupport\scripts\cgp-choco-appinstall.ps1; c:\itsupport\scripts\cgp-choco-appinstall.ps1"
+SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+C:\ProgramData\chocolatey\bin\choco install googlechrome, firefox, 7zip, vlc, jre8, dotnetfx, office365business, --pre --yes
+
+#>
+
+
+
+Relevant packages
+CGP Stack:
+googlechrome, firefox, 7zip, vlc, jre8, dotnetfx, office365business, microsoft-teams.install, slack
+
+Additional:
+googlechrome, notepadplusplus, firefox, 7zip, sysinternals, adobereader, jre8, vlc, dotnetfx, microsoft-teams.install, office365business
+zoom, dotnet3.5, dotnet4.5.2, dotnet4.6.1, vcredist2008, vcredist2010, vcredist2013, vcredist2017, dellcommandupdate, slack
