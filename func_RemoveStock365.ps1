@@ -1,3 +1,12 @@
+<#
+#usage
+
+#RemoveStock365
+remove-item c:\itsupport\scripts\func_func_RemoveStock365.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_RemoveStock365.ps1 -OutFile c:\itsupport\scripts\func_RemoveStock365.ps1"
+powershell -exec bypass -c ". c:\itsupport\scripts\func_RemoveStock365.ps1; RemoveStock365"
+
+#>
 function RemoveStock365 {
 	
 	#Remove factory bloat office365
