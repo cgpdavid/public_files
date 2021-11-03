@@ -1,5 +1,15 @@
-#usage RenamePcXXXPrefix($ClientHostnamePrefix="test")
-#usage RenamePcXXXPrefix($ClientHostnamePrefix=$VarFromScript)
+<#
+#USAGE
+
+#RenamePcXXXPrefix
+$PreFix = "XXX" #must change this to client xxx prefix (two or three letters only!)
+remove-item c:\itsupport\scripts\func_RenamePcXXXPrefix.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_RenamePcXXXPrefix.ps1 -OutFile c:\itsupport\scripts\func_RenamePcXXXPrefix.ps1"
+powershell -exec bypass -c ". c:\itsupport\scripts\func_RenamePcXXXPrefix.ps1; RenamePcXXXPrefix('$PreFix')"
+
+#>
+
+
 function RenamePcXXXPrefix {
 param (
     [CmdletBinding()]
