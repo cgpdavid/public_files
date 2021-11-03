@@ -32,6 +32,13 @@ Get-appxprovisionedpackage -online | where-object {$_.packagename -like '*onenot
 Write-Host "Attempting automated uninstall of 365 C2R apps"
 write-host "Checking if bloat c2r installers exist"
 $fileToCheck = "C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeClickToRun.exe"
+
+Show-InstallationProgress -StatusMessage "Performing 365 cleanup. This may take some time. Please wait...";
+Write-Log -Message "365 Will be uninstalled"
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/OfficeDev/Office-IT-Pro-Deployment-Scripts/master/Office-ProPlus-Deployment/Remove-PreviousOfficeInstalls/OffScrubc2r.vbs -OutFile c:\itsupport\scripts\OffScrubc2r.vbs"
+Execute-Process -FilePath "CScript.Exe" -Arguments "`"$dirsupportFiles\OffScrubc2r.vbs`" CLIENTALL /S /Q /NoCancel" -WindowStyle Hidden -IgnoreExitCodes "1,2,3,16,42"
+
+
 if (Test-Path $fileToCheck -PathType leaf)
 {
 	Write-Host "Manually Removing bundled 365 en-us"
