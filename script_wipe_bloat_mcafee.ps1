@@ -1,9 +1,13 @@
-# 
-# Author: CGP David
-# Usage: 
-# powershell -exec bypass -c "(new-object net.webclient).DownloadFile('https://raw.githubusercontent.com/cgpdavid/public_files/main/script_wipe_bloat_mcafee.ps1','script_wipe_bloat_mcafee.ps1'); ./script_wipe_bloat_mcafee.ps1"
-#
+<#
+#usage
 
+#script_wipe_bloat_mcafee
+#Removes bundled bloat mcafee. Sometimes throws red errors. make sure mcafee is removed after its done. Takes a while.
+remove-item $env:TEMP\script_wipe_bloat_mcafee.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/script_wipe_bloat_mcafee.ps1 -OutFile $env:TEMP\script_wipe_bloat_mcafee.ps1"
+powershell -exec bypass -c ". $env:TEMP\script_wipe_bloat_mcafee.ps1;"
+
+#>
 # Functions
 
 function CheckAndCreateITSFolders {
