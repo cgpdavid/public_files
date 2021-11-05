@@ -1,3 +1,14 @@
+<#
+#usage
+
+#script_bentley_apps_install
+#Downloads and installs bentley apps - For now, only the connection client
+remove-item $env:TEMP\script_bentley_apps_install.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/script_bentley_apps_install.ps1 -OutFile $env:TEMP\script_bentley_apps_install.ps1"
+powershell -exec bypass -c ". $env:TEMP\script_bentley_apps_install.ps1;"
+
+#>
+
 function CheckIfRunningAsAdmin {
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]"Administrator")) {
     write-host "MUST BE RUN AS ADMIN - Exiting in 10 seconds!" -ForegroundColor RED
