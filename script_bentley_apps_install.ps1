@@ -32,7 +32,8 @@ write-host "Downloading Bentley Prerequisites Installer"
 write-host "This might take awhile - The installer is xxxxxxx"
 Invoke-WebRequest "https://cdnllnw.bentley.com/s/bentley/productregistry/dist2/intel/v0811/desktopprerequisites/b8cef45f58f3408cbadd9518ba87ebc9/pbda08110706en.exe?e=1635463901.839352&h=e17dac0e0341f3d014a1bc2302158b38&x=pbda08110706en.exe" -OutFile C:\itsupport\Installers\Bentley\BentleyPrerequisites.exe
 
-#Prerequisites for Bentley Desktop Applications (English) 
+#Prerequisites for Bentley Desktop Applications (English)
+#https://softwaredownloads.bentley.com/en/ProductDetails/1246
 #https://cdnllnw.bentley.com/s/bentley/productregistry/dist2/intel/v0811/desktopprerequisites/b8cef45f58f3408cbadd9518ba87ebc9/pbda08110706en.exe?e=1635463901.839352&h=e17dac0e0341f3d014a1bc2302158b38&x=pbda08110706en.exe
 
 
@@ -50,6 +51,7 @@ if ($askBentleyStormCAD -eq 'y') {
 	#Invoke-WebRequest "https://www.bentley.com/en/Resources/Software/CONNECTION-Client" -OutFile C:\itsupport\Installers\Bentley\BentleyConnectLatest.zip
 	
 	#StormCAD CONNECT Edition x64 (SES) (English) 
+	#https://softwaredownloads.bentley.com/en/ProductDetails/1246
 	#https://cdnllnw.bentley.com/s/p/rl/dist2/intel/v1003/stormcadx64/f928f47aba434849b50fa0a800fe2349/stmc10030453en.exe?e=1635467498.5288565&h=35bef13a4d47e43099adc409faf69f28&x=stmc10030453en.exe
 
 	
@@ -60,7 +62,8 @@ if ($askBentleyimodel -eq 'y') {
 	write-host "Downloading Bentley i-model"
 	#Invoke-WebRequest "https://www.bentley.com/en/Resources/Software/CONNECTION-Client" -OutFile C:\itsupport\Installers\Bentley\BentleyConnectLatest.zip
 	
-	#i-model Publishing Engine for Hydraulics and Hydrology Beta 1 (English) 
+	#i-model Publishing Engine for Hydraulics and Hydrology Beta 1 (English)
+	#https://softwaredownloads.bentley.com/en/ProductDetails/1246
 	#https://cdnllnw.bentley.com/s/bentley/productregistry/dist2/beta/intel/v0811/imodelenginehaestad/0f6270134058452baee323821a9ebefd/imeh08110704en.exe?e=1635463904.8354845&h=91c248f822cc9651d2811f93ea4192e3&x=imeh08110704en.exe
 
 }
@@ -70,7 +73,8 @@ if ($askBentleyCulvertMaster -eq 'y') {
 	write-host "Downloading Bentley CulvertMaster"
 	#Invoke-WebRequest "https://www.bentley.com/en/Resources/Software/CONNECTION-Client" -OutFile C:\itsupport\Installers\Bentley\BentleyConnectLatest.zip
 	
-	#Bentley CulvertMaster CONNECT Edition (SES) (English) 
+	#Bentley CulvertMaster CONNECT Edition (SES) (English)
+	#https://softwaredownloads.bentley.com/en/ProductDetails/1210
 	#https://cdnllnw.bentley.com/s/p/rl/dist2/intel/v1003/culvertmaster/2222f2ad86324ab58466a8452a856d15/cvm10030003en.exe?e=1635464052.4784746&h=70c9eda3cf062a6bad2faa854232b6bc&x=cvm10030003en.exe
 
 }
