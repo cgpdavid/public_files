@@ -8,6 +8,7 @@ powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/
 powershell -exec bypass -c ". $env:TEMP\script_wipe_bloat_mcafee.ps1;"
 
 #>
+
 # Functions
 
 function CheckAndCreateITSFolders {
