@@ -11,3 +11,6 @@ A note on confidentiality: All of these scripts have been sanitized to the best 
 
 Lastly, for full-pc setup scripts and scrips with API keys and other sensitive information: 
 I also have a secondary private repo with those scripts. Please teams message David to request access.
+
+Check the file for how to use these:
+QUICK SCRIPTS FOR TECHS.txt
