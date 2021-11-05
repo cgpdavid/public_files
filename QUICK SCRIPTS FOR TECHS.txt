@@ -1,0 +1,126 @@
+########################################################################################
+#CheckAndCreateITSFolders
+#Always run this one first! to setup c:\itsupport folders
+remove-item $env:TEMP\func_CheckAndCreateITSFolders.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_CheckAndCreateITSFolders.ps1 -OutFile $env:TEMP\func_CheckAndCreateITSFolders.ps1"
+powershell -exec bypass -c ". $env:TEMP\func_CheckAndCreateITSFolders.ps1; CheckAndCreateITSFolders"
+########################################################################################
+
+########################################################################################
+#RemoveFromAzureAD
+#Run BEFORE joun to domain script - for when users setup a PC using their work email.
+remove-item $env:TEMP\func_RemoveFromAzureAD.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_RemoveFromAzureAD.ps1 -OutFile $env:TEMP\func_RemoveFromAzureAD.ps1"
+powershell -exec bypass -c ". $env:TEMP\func_RemoveFromAzureAD.ps1; RemoveFromAzureAD"
+########################################################################################
+
+########################################################################################
+#JoinToDomain
+#Needs reboot immediately after
+remove-item $env:TEMP\func_JoinToDomain.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_JoinToDomain.ps1 -OutFile $env:TEMP\func_JoinToDomain.ps1"
+powershell -exec bypass -c ". $env:TEMP\func_JoinToDomain.ps1; JoinToDomain"
+########################################################################################
+
+########################################################################################
+#DisableSleepTimers
+#Disables sleep and hibernate timers while plugged in. Users can still manually sleep or hibernate. Can be safely run on both laptops and desktops
+remove-item $env:TEMP\func_DisableSleepTimers.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_DisableSleepTimers.ps1 -OutFile $env:TEMP\func_DisableSleepTimers.ps1"
+powershell -exec bypass -c ". $env:TEMP\func_DisableSleepTimers.ps1; DisableSleepTimers"
+########################################################################################
+
+########################################################################################
+#RemoveStock365
+#ALWAYS RUN BEFORE CHOCO UPDATE SCRIPT - NEVER AFTER!
+#Will throw lots of red errors, but at the end make sure 365 is removed from start menu.  Takes a while.
+remove-item $env:TEMP\func_func_RemoveStock365.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_RemoveStock365.ps1 -OutFile $env:TEMP\func_RemoveStock365.ps1"
+powershell -exec bypass -c ". $env:TEMP\func_RemoveStock365.ps1; RemoveStock365"
+########################################################################################
+
+########################################################################################
+#script_wipe_bloat_mcafee
+#Removes bundled bloat mcafee. Sometimes throws red errors. make sure mcafee is removed after its done. Takes a while.
+remove-item $env:TEMP\script_wipe_bloat_mcafee.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/script_wipe_bloat_mcafee.ps1 -OutFile $env:TEMP\script_wipe_bloat_mcafee.ps1"
+powershell -exec bypass -c ". $env:TEMP\script_wipe_bloat_mcafee.ps1;"
+########################################################################################
+
+########################################################################################
+# Choco Install Basic Packages
+# Sometimes these packages error, because the software vendor changes something. Please let me know when they do.
+# googlechrome, firefox, 7zip, vlc, jre8, dotnet-runtime, dotnetfx, office365business
+remove-item $env:TEMP\cgp-choco-appinstall.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/cgp-choco-appinstall.ps1 -OutFile $env:TEMP\cgp-choco-appinstall.ps1; $env:TEMP\cgp-choco-appinstall.ps1"
+SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+C:\ProgramData\chocolatey\bin\choco install googlechrome, firefox, 7zip, vlc, jre8, dotnetfx, office365business, --pre --yes
+########################################################################################
+
+########################################################################################
+#OfficeIconsDesktops
+#Add Office icons to desktop of ALL users - Will not work if not logged into user yet
+remove-item $env:TEMP\func_OfficeIconsDesktops.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_OfficeIconsDesktops.ps1 -OutFile $env:TEMP\func_OfficeIconsDesktops.ps1"
+powershell -exec bypass -c ". $env:TEMP\func_OfficeIconsDesktops.ps1; OfficeIconsDesktops"
+########################################################################################
+
+########################################################################################
+# FortiClientVpnInstallandConfigure
+# Downloads and installs forticlient, then configures default profile. Make sure to check configs for description and server. it MUST! Have the :port at the end!!
+remove-item $env:TEMP\func_WindowsUpdatesInstallAuto.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_FortiClientVpnInstallandConfigure.ps1 -OutFile $env:TEMP\func_FortiClientVpnInstallandConfigure.ps1"
+powershell -exec bypass -c ". $env:TEMP\func_FortiClientVpnInstallandConfigure.ps1; FortiClientVpnInstallandConfigure"
+
+$VPNConnectionName = "Description Here (usually XXX VPN)"
+$VPNdescription = "XXX VPN"
+$VPNserverAddress = "vpn.clientdomain.com:port"
+#Write Config to registry
+if((Test-Path -LiteralPath "HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels") -ne $true) {  New-Item "HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels" -force -ea SilentlyContinue };
+if((Test-Path -LiteralPath "HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName") -ne $true) {  New-Item "HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName" -force -ea SilentlyContinue };
+New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'Description' -Value $VPNdescription -PropertyType String -Force -ea SilentlyContinue;
+New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'Server' -Value $VPNserverAddress -PropertyType String -Force -ea SilentlyContinue;
+New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'promptusername' -Value 1 -PropertyType DWord -Force -ea SilentlyContinue;
+New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'promptcertificate' -Value 0 -PropertyType DWord -Force -ea SilentlyContinue;
+New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'DATA3' -Value '' -PropertyType String -Force -ea SilentlyContinue;
+New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'ServerCert' -Value '1' -PropertyType String -Force -ea SilentlyContinue;
+New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'dual_stack' -Value 0 -PropertyType DWord -Force -ea SilentlyContinue;
+New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'sso_enabled' -Value 0 -PropertyType DWord -Force -ea SilentlyContinue;
+New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'use_external_browser' -Value 0 -PropertyType DWord -Force -ea SilentlyContinue;
+########################################################################################
+
+########################################################################################
+#WindowsUpdatesInstallAuto
+#Lists all the updates, then auto installs them
+remove-item $env:TEMP\func_WindowsUpdatesInstallAuto.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_WindowsUpdatesInstallAuto.ps1 -OutFile $env:TEMP\func_WindowsUpdatesInstallAuto.ps1"
+powershell -c ". $env:TEMP\func_WindowsUpdatesInstallAuto.ps1; WindowsUpdatesInstallAuto"
+########################################################################################
+
+########################################################################################
+#systemdriversandfirmwareupdate
+#Checks if its a Dell or Lenovo, then downloads and installs firmware and driver updates.
+#If the system has "Dell Update" such as on XPS systems, it may not work. Removal of incompatible software is a feature in the works
+remove-item $env:TEMP\func_systemdriversandfirmwareupdate.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_systemdriversandfirmwareupdate.ps1 -OutFile $env:TEMP\func_systemdriversandfirmwareupdate.ps1"
+powershell -exec bypass -c ". $env:TEMP\func_systemdriversandfirmwareupdate.ps1; systemdriversandfirmwareupdate"
+########################################################################################
+
+########################################################################################
+#W10FeatureUpgrade
+#Downloads and installs the latest Windows feature update
+remove-item $env:TEMP\func_W10FeatureUpgrade.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_W10FeatureUpgrade.ps1 -OutFile $env:TEMP\func_W10FeatureUpgrade.ps1"
+powershell -c ". $env:TEMP\func_W10FeatureUpgrade.ps1; W10FeatureUpgrade"
+write-host "sleeping for 5 seconds"
+Start-Sleep -s 5
+Remove-Item "C:\users\*\Desktop\Windows 10 Update Assistant.lnk" -Force -erroraction silentlycontinue
+$wshell = New-Object -ComObject wscript.shell;
+$wshell.AppActivate('Windows 10 Update Assistant')
+Sleep 1
+$wshell.SendKeys('{TAB}')
+Sleep 1
+$wshell.SendKeys('{ENTER}')
+########################################################################################
+
+
