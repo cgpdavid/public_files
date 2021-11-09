@@ -3,7 +3,7 @@
 #SetPdfDefault
 remove-item c:\itsupport\scripts\func_SetPdfDefault.ps1 -erroraction silentlycontinue
 powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_SetPdfDefault.ps1 -OutFile c:\itsupport\scripts\func_SetPdfDefault.ps1"
-powershell -c ". c:\itsupport\scripts\func_SetPdfDefault.ps1; WindowsUpdatesInstallAuto"
+powershell -c ". c:\itsupport\scripts\func_SetPdfDefault.ps1; OpenPDFFileProperties"
 
 #>
 
