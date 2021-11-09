@@ -106,8 +106,7 @@ New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels
 New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'dual_stack' -Value 0 -PropertyType DWord -Force -ea SilentlyContinue;
 New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'sso_enabled' -Value 0 -PropertyType DWord -Force -ea SilentlyContinue;
 New-ItemProperty -LiteralPath HKLM:\SOFTWARE\Fortinet\FortiClient\Sslvpn\Tunnels\$VPNConnectionName -Name 'use_external_browser' -Value 0 -PropertyType DWord -Force -ea SilentlyContinue;
-}
-else {
+} else {
 write-host "Forticlient not detected - skipping config import" -ForegroundColor red
 }
 ########################################################################################
