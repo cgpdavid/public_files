@@ -1,5 +1,6 @@
 <#
 #Usage
+Set-ExecutionPolicy Bypass -Scope Process -force
 remove-item c:\itsupport\scripts\func_install_rc_phone.ps1 -erroraction silentlycontinue
 powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_install_rc_phone.ps1 -OutFile c:\itsupport\scripts\func_install_rc_phone.ps1"
 powershell -c ". c:\itsupport\scripts\func_install_rc_phone.ps1;"
