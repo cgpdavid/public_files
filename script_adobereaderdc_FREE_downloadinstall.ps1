@@ -6,9 +6,9 @@
    Finds, downloads & installs the latest version of Adobe Acrobat Reader DC.
 
 .EXAMPLE
-	remove-item $env:TEMP\script_adobereaderdc_PRO_downloadinstall.ps1 -erroraction silentlycontinue
-	powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/script_adobereaderdc_PRO_downloadinstall.ps1 -OutFile $env:TEMP\script_adobereaderdc_PRO_downloadinstall.ps1"
-	powershell -exec bypass -c ". $env:TEMP\script_adobereaderdc_PRO_downloadinstall.ps1"
+	remove-item $env:TEMP\script_adobereaderdc_FREE_downloadinstall.ps1 -erroraction silentlycontinue
+	powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/script_adobereaderdc_FREE_downloadinstall.ps1 -OutFile $env:TEMP\script_adobereaderdc_FREE_downloadinstall.ps1"
+	powershell -exec bypass -c ". $env:TEMP\script_adobereaderdc_FREE_downloadinstall.ps1"
 
 .FUNCTIONALITY
 
@@ -23,6 +23,14 @@
 #>
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+Clear-Host
+Write-Verbose "Starting Installation" -Verbose
+$StartDTM = (Get-Date)
+
+$LogPS = "C:\itsupport\logs\Adobe Acrobat Reader DC $Version PS Wrapper.log"
+
+Start-Transcript $LogPS
 
 ## Get the latest version of adobe reader dc 
 
@@ -48,7 +56,7 @@ $Headers = @{
 	"User-Agent"       = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36 Edg/88.0.705.81"
 	Referer            = "https://get.adobe.com/reader/otherversions/"
 	DNT                = "1"
-	"Accept-Language"  = "en_GB,en_US;q=0.9,en;q=0.8"
+	"Accept-Language"  = "en_US;q=0.9,en;q=0.8"
 	"Sec-Fetch-Mode"   = "cors"
 	"Accept-Encoding"  = "gzip, deflate, br"
 }
@@ -104,15 +112,9 @@ $PatchFile = (Get-Item -Path "$DownloadsFolder\AcroRdrDCx64\AcroRdrDCx64Upd*.msp
 # setup.ini
 # https://www.adobe.com/devnet-docs/acrobatetk/tools/AdminGuide/properties.html
 $CmdLine = @(
-	"ENABLE_CHROMEEXT=0",
-	"DISABLE_BROWSER_INTEGRATION=YES",
-	"DISABLE_DISTILLER=YES",
 	"REMOVE_PREVIOUS=YES",
 	"IGNOREVCRT64=1",
 	"EULA_ACCEPT=YES",
-	"DISABLE_PDFMAKER=YES",
-	# This is the only valid value for Reader
-	"DISABLEDESKTOPSHORTCUT=1",
 	# Install updates automatically
 	"UPDATE_MODE=3"
 )
@@ -131,10 +133,16 @@ Write-Verbose "Starting Installation of Adobe Reader DC"
 (Start-Process "$DownloadsFolder\AcroRdrDCx64\setup.exe" $UnattendedArgs -Wait -Passthru).ExitCode 
 
 ## Create Detection Method. 
-$logfilespath = "C:\logfiles"
+$logfilespath = "C:\itsupport\logs\"
 If(!(test-path $logfilespath))
 {
       New-Item -ItemType Directory -Force -Path $logfilespath
 }
 
 New-Item -ItemType "file" -Path "C:\itsupport\logs\AdobeReaderDC-$Version.txt"
+
+Write-Verbose "Stop logging" -Verbose
+$EndDTM = (Get-Date)
+Write-Verbose "Elapsed Time: $(($EndDTM-$StartDTM).TotalSeconds) Seconds" -Verbose
+Write-Verbose "Elapsed Time: $(($EndDTM-$StartDTM).TotalMinutes) Minutes" -Verbose
+Stop-Transcript
