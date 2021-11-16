@@ -6,9 +6,9 @@
    Finds, downloads & installs the latest version of Adobe Acrobat Reader DC.
 
 .EXAMPLE
-	remove-item $env:TEMP\script_adobereaderdc_free_downloadinstall.ps1 -erroraction silentlycontinue
-	powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/script_adobereaderdc_free_downloadinstall.ps1 -OutFile $env:TEMP\script_adobereaderdc_free_downloadinstall.ps1"
-	powershell -exec bypass -c ". $env:TEMP\script_adobereaderdc_free_downloadinstall.ps1"
+	remove-item $env:TEMP\script_adobereaderdc_PRO_downloadinstall.ps1 -erroraction silentlycontinue
+	powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/script_adobereaderdc_PRO_downloadinstall.ps1 -OutFile $env:TEMP\script_adobereaderdc_PRO_downloadinstall.ps1"
+	powershell -exec bypass -c ". $env:TEMP\script_adobereaderdc_PRO_downloadinstall.ps1"
 
 .FUNCTIONALITY
 
@@ -67,7 +67,7 @@ powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/
 powershell -exec bypass -c ". $env:TEMP\func_CheckAndCreateITSFolders.ps1; CheckAndCreateITSFolders"
 
 # Download the installer
-$DownloadsFolder = C:\itsupport\Installers\
+$DownloadsFolder = "C:\itsupport\Installers\"
 $Parameters = @{
 	Uri             = $URL
 	OutFile         = "$DownloadsFolder\AcroRdrDCx64.exe"
