@@ -2,6 +2,7 @@
 #Usage
 remove-item $env:TEMP\script_cwa_universaluninstaller.ps1 -erroraction silentlycontinue
 powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/script_cwa_universaluninstaller.ps1 -OutFile $env:TEMP\script_cwa_universaluninstaller.ps1"
+New-Item -Path "C:\" -Name "itsupport" -ItemType "directory" -force
 powershell -exec bypass -c ". $env:TEMP\script_cwa_universaluninstaller.ps1"
 
 #>
