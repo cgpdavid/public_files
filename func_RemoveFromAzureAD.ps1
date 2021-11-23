@@ -1,3 +1,13 @@
+<#
+#Usage
+
+#RemoveFromAzureAD
+remove-item $env:TEMP\func_RemoveFromAzureAD.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_RemoveFromAzureAD.ps1 -OutFile $env:TEMP\func_RemoveFromAzureAD.ps1"
+powershell -exec bypass -c ". $env:TEMP\func_RemoveFromAzureAD.ps1; RemoveFromAzureAD"
+
+#>
+
 function RemoveFromAzureAD {
 if (Get-Module -ListAvailable -Name SomeModule) {
     Write-Host "InvokeAsSystem Module exists"
