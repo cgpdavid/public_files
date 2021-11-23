@@ -14,7 +14,7 @@ if (Get-Module -ListAvailable -Name SomeModule) {
 } 
 else {
     Write-Host "InvokeAsSystem Module does not exist, installing"
-    Install-Module -Name InvokeAsSystem
+    Install-Module -Name InvokeAsSystem -Force
 }
 	
 	$dsreg = dsregcmd.exe /status
