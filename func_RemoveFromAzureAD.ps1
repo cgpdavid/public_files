@@ -1,4 +1,11 @@
 function RemoveFromAzureAD {
+if (Get-Module -ListAvailable -Name SomeModule) {
+    Write-Host "InvokeAsSystem Module exists"
+} 
+else {
+    Write-Host "InvokeAsSystem Module does not exist, installing"
+    Install-Module -Name InvokeAsSystem
+}
 	
 	$dsreg = dsregcmd.exe /status
 	if (($dsreg | Select-String "AzureAdJoined :") -match "NO") {
