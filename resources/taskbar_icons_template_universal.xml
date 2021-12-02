@@ -10,7 +10,7 @@
       <taskbar:TaskbarPinList>
         <taskbar:DesktopApp DesktopApplicationID="Microsoft.Windows.Explorer"/>
 		<taskbar:DesktopApp DesktopApplicationID="Chrome"/>
-		<taskbar:DesktopApp DesktopApplicationID="Microsoft.Office.OUTLOOK.EXE.15"/>
+		<taskbar:DesktopApp DesktopApplicationID="Microsoft.Office.OUTLOOK.EXE.16"/>
       </taskbar:TaskbarPinList>
     </defaultlayout:TaskbarLayout>
  </CustomTaskbarLayoutCollection>
