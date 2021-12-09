@@ -14,12 +14,12 @@ powershell -exec bypass -c ". $env:TEMP\func_CheckAndCreateITSFolders.ps1; Check
 
 
 $url = "https://downloads.ringcentral.com/sp/RingCentralForWindows"
-$outpath = "$env:TEMP\RingCentral-Phone-MostRecent.msi"
+$outpath = "C:\itsupport\installers\RingCentral-Phone-MostRecent.msi"
 $ProgressPreference = 'SilentlyContinue'
-New-Item -ItemType Directory -Force -Path $env:TEMP\
+New-Item -ItemType Directory -Force -Path C:\itsupport\installers\
 Invoke-WebRequest -Uri $url -OutFile $outpath
 $wc = New-Object System.Net.WebClient
 $wc.DownloadFile($url, $outpath)
 Write-Host "FileSource $url"
 Write-Host "FileDestination $outpath"
-Start-Process msiexec.exe -Wait -ArgumentList '/I "$env:TEMP\RingCentral-Phone-MostRecent.msi" ALLUSERS=1 /quiet /L*V! $env:TEMP\RingCentralPhone_install_log.txt'
+Start-Process msiexec.exe -Wait -ArgumentList '/I "C:\itsupport\installers\RingCentral-Phone-MostRecent.msi" ALLUSERS=1 /quiet /L*V! C:\itsupport\logs\RingCentralPhone_install_log.txt'
