@@ -10,7 +10,7 @@ powershell -c ". $env:TEMP\func_WindowsUpdatesInstallAuto.ps1; WindowsUpdatesIns
 function WindowsUpdatesInstallAuto {
 try {
 		write-host "Setting up windows updates powershell modules"
-		Install-PackageProvider -Name NuGet -RequiredVersion 2.8.5.201 -Force
+		Install-PackageProvider -Name NuGet -Force
 		Install-Module PSWindowsUpdate -force
 		write-host "Checking for and Installing windows updates - This might take a long time"
 		Get-WindowsUpdate
