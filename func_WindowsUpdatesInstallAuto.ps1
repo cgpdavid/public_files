@@ -1,3 +1,12 @@
+#WindowsUpdatesInstallAuto
+#Lists all the updates, then auto installs them
+remove-item $env:TEMP\func_WindowsUpdatesInstallAuto.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_WindowsUpdatesInstallAuto.ps1 -OutFile $env:TEMP\func_WindowsUpdatesInstallAuto.ps1"
+Set-ExecutionPolicy Bypass -Scope Process -force
+powershell -c ". $env:TEMP\func_WindowsUpdatesInstallAuto.ps1; WindowsUpdatesInstallAuto"
+
+
+
 function WindowsUpdatesInstallAuto {
 try {
 		write-host "Setting up windows updates powershell modules"
