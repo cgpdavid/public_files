@@ -54,14 +54,14 @@ Set-Acl $Path $Acl
 
 
 If ($askBypassMsKB1 -eq 'Y'){
-Write-Host 'Bypassing Microsoft Driver Install as Admin patch' -ForegroundColor Green
+Write-Host 'Bypassing Microsoft Driver Install as Admin patch KB5005033' -ForegroundColor Green
 REG ADD "HKLM\Software\Policies\Microsoft\Windows NT\Printers\PointAndPrint" /v RestrictDriverInstallationToAdministrators /t REG_DWORD /d 0
 REG ADD "HKLM\Software\Policies\Microsoft\Windows NT\Printers\PointAndPrint" /v UpdatePromptSettings /t REG_DWORD /d 0
 REG ADD "HKLM\Software\Policies\Microsoft\Windows NT\Printers\PointAndPrint" /v NoWarningNoElevationOnInstall /t REG_DWORD /d 0
 }
 
 If ($askBypassMsKB2 -eq 'Y'){
-Write-Host 'Bypassing Microsoft Driver Install as Admin patch' -ForegroundColor Green
+Write-Host 'Bypassing Microsoft patch KB5005565' -ForegroundColor Green
 REG ADD "HKLM\System\CurrentControlSet\Control\Print" /v RpcAuthnLevelPrivacyEnabled /t REG_DWORD /d 0
 }
 
