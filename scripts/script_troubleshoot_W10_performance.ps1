@@ -2,6 +2,13 @@
 System Performance Troubleshooting Script
 Maintained by David
 
+#USAGE
+#script_troubleshoot_W10_performance
+remove-item $env:TEMP\script_troubleshoot_W10_performance.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/scripts/script_troubleshoot_W10_performance.ps1 -OutFile $env:TEMP\script_troubleshoot_W10_performance.ps1"
+powershell -exec bypass -c ". $env:TEMP\script_troubleshoot_W10_performance.ps1"
+
+
 
 #>
 # elevated script execution with admin privileges
