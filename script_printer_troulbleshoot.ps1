@@ -34,7 +34,8 @@ CheckIfRunningAsAdmin
 
 $askClearPrintJobs=Read-Host "Would you like to clear Stuck printjobs? (Y/N)"
 $askPrintNightmare=Read-Host "Would you like to bypass PrintNightmare? (Y/N)"
-$askBypassMsKB=Read-Host "Would you like to bypass Microsoft printing as admin KB5005033? (Y/N)"
+$askBypassMsKB1=Read-Host "Would you like to bypass Microsoft printing as admin KB5005033? (Y/N)"
+$askBypassMsKB2=Read-Host "Would you like to bypass Microsoft printing as admin KB5005565? (Y/N)"
 $askGpupdate=Read-Host "Would you like to gpupdate /force as the last step? (Y/N)"
 
 
@@ -52,12 +53,18 @@ Set-Acl $Path $Acl
 }
 
 
-If ($askBypassMsKB -eq 'Y'){
+If ($askBypassMsKB1 -eq 'Y'){
 Write-Host 'Bypassing Microsoft Driver Install as Admin patch' -ForegroundColor Green
 REG ADD "HKLM\Software\Policies\Microsoft\Windows NT\Printers\PointAndPrint" /v RestrictDriverInstallationToAdministrators /t REG_DWORD /d 0
 REG ADD "HKLM\Software\Policies\Microsoft\Windows NT\Printers\PointAndPrint" /v UpdatePromptSettings /t REG_DWORD /d 0
 REG ADD "HKLM\Software\Policies\Microsoft\Windows NT\Printers\PointAndPrint" /v NoWarningNoElevationOnInstall /t REG_DWORD /d 0
 }
+
+If ($askBypassMsKB2 -eq 'Y'){
+Write-Host 'Bypassing Microsoft Driver Install as Admin patch' -ForegroundColor Green
+REG ADD "HKLM\System\CurrentControlSet\Control\Print" /v RpcAuthnLevelPrivacyEnabled /t REG_DWORD /d 0
+}
+
 
 If ($askClearPrintJobs -eq 'Y'){
 Write-Host 'Stopping Spooler Service ...' -ForegroundColor Green
