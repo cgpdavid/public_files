@@ -1,3 +1,6 @@
+
+	
+	
 <#
 #usage
 
@@ -40,8 +43,32 @@ if (Get-WmiObject win32_SystemEnclosure -Filter: "Manufacturer LIKE 'Dell Inc.'"
 		}else {
 			write-host "We could not locate dell command update!" -ForegroundColor Red
             if ($DcuInstallAttempt -eq $null) {
-			
 			write-host "Installing Dell Command Update"
+			write-host "Removing conflicting dell update applications if any before proceding"
+			
+			#remove dell update and dell update UWX
+			$productNames = @("*Dell Update for Windows Universal*")
+			$UninstallKeys = @('HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall','HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall','HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall')
+			$results = foreach ($key in (Get-ChildItem $UninstallKeys) ) {foreach ($product in $productNames) {if ($key.GetValue("DisplayName") -like "$product") {[pscustomobject]@{KeyName = $key.Name.split('\')[-1];DisplayName = $key.GetValue("DisplayName");UninstallString = $key.GetValue("UninstallString");}}}}
+			$Guid = $results.KeyName
+			if ($guid) {
+			Start-Process msiexec.exe -Wait -ArgumentList "/X$Guid /passive"
+			}
+			
+			$results = foreach ($key in (Get-ChildItem $UninstallKeys) ) {foreach ($product in $productNames) {if ($key.GetValue("DisplayName") -like "$product") {[pscustomobject]@{KeyName = $key.Name.split('\')[-1];DisplayName = $key.GetValue("DisplayName");UninstallString = $key.GetValue("UninstallString");}}}}
+			$Guid = $results.KeyName
+			if ($guid) {
+				Start-Process msiexec.exe -Wait -ArgumentList "/X$Guid /passive"
+			}
+
+			$WinVersion = ([System.Environment]::OSVersion.Version).Major
+				if ($WinVersion -eq "10") {
+					if ((Get-AppxPackage | Where-Object { $_.name -eq "DellInc.DellUpdate" } | Select-Object name -expandproperty name) -eq "DellInc.DellUpdate") {
+						Get-AppxPackage | Where-Object { $_.name -eq "DellInc.DellUpdate" } | Remove-AppxPackage
+					}
+				}
+				
+			write-host "downloading and Installing Dell Command Update now"
 			# Choco Install Basic Packages
 			remove-item c:\itsupport\scripts\cgp-choco-appinstall.ps1 -erroraction silentlycontinue
 			powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/cgp-choco-appinstall.ps1 -OutFile c:\itsupport\scripts\cgp-choco-appinstall.ps1; c:\itsupport\scripts\cgp-choco-appinstall.ps1"
