@@ -5,9 +5,9 @@
 #usage
 
 #systemdriversandfirmwareupdate
-remove-item c:\itsupport\scripts\func_systemdriversandfirmwareupdate.ps1 -erroraction silentlycontinue
-powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_systemdriversandfirmwareupdate.ps1 -OutFile c:\itsupport\scripts\func_systemdriversandfirmwareupdate.ps1"
-powershell -exec bypass -c ". c:\itsupport\scripts\func_systemdriversandfirmwareupdate.ps1; systemdriversandfirmwareupdate"
+remove-item $env:TEMP\scripts\func_systemdriversandfirmwareupdate.ps1 -erroraction silentlycontinue
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_systemdriversandfirmwareupdate.ps1 -OutFile $env:TEMP\scripts\func_systemdriversandfirmwareupdate.ps1"
+powershell -exec bypass -c ". $env:TEMP\scripts\func_systemdriversandfirmwareupdate.ps1; systemdriversandfirmwareupdate"
 
 #>
 
