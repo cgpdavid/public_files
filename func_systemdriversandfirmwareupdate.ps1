@@ -5,7 +5,7 @@
 #usage
 
 #systemdriversandfirmwareupdate
-remove-item $env:TEMP\scripts\func_systemdriversandfirmwareupdate.ps1 -erroraction silentlycontinue
+remove-item $env:TEMP\func_systemdriversandfirmwareupdate.ps1 -erroraction silentlycontinue
 powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_systemdriversandfirmwareupdate.ps1 -OutFile $env:TEMP\func_systemdriversandfirmwareupdate.ps1"
 powershell -exec bypass -c ". $env:TEMP\func_systemdriversandfirmwareupdate.ps1; systemdriversandfirmwareupdate"
 
@@ -76,6 +76,8 @@ if (Get-WmiObject win32_SystemEnclosure -Filter: "Manufacturer LIKE 'Dell Inc.'"
 			C:\ProgramData\chocolatey\bin\choco install dellcommandupdate --pre --yes
 			$DcuInstallAttempt = $true
 			
+			write-host "Sleeping for 5 seconds to let windows catch up"
+			Start-Sleep -s 5
 			#LaunchDCU
 			DellDcuUpdate
 			
