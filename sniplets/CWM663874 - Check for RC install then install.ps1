@@ -2,14 +2,14 @@
 Notes:
 This is not the cleanest, but working.
 
-This script checks registry keys for presense of a RingCentral install, and if detected, exits.
+This script checks registry keys for presence of a RingCentral install, and if detected, exits.
 If there are no matches, it downloads and executes another powershell script located at https://raw.githubusercontent.com/cgpdavid/public_files/main/func_install_rc_phone.ps1
 The dropped script creates the c:\itsupport\ folders if not already present, downloads the most recent RingCentral installer, and then installs it MACHINE WIDE silently using msiexec
 and writes a log of the install at C:\itsupport\logs\RingCentralPhone_install_log.txt
 
 Running this script instead of directly https://raw.githubusercontent.com/cgpdavid/public_files/main/func_install_rc_phone.ps1
 is required because if you run the direct script and a user has the DEFAULT per-user install of Ringcentral, they will wind up with two icons and some confusion. 
-If that is not a concern, ignore this script and execute the one refferenced above directly. 
+If that is not a concern, ignore this script and execute the one referenced above directly. 
 
 Additional note:
 Ringcentral phone for whatever reason touches the printspooler folder during install, and will fail if printnightmare ACL deny rules are in place. The above script bypasses it so that the install completes.
