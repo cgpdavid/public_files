@@ -12,14 +12,14 @@ powershell -c ". $env:TEMP\func_install_rc_phone.ps1;"
 #Checking if Ringcentral is installed
 $fileToCheck = "C:\Program Files (x86)\RingCentral\SoftPhoneApp\Softphone.exe"
 if (-not(Test-Path $fileToCheck -PathType leaf)){
-	write-host "RingCentral phone not detected - proceeding"
+	write-output "RingCentral phone not detected - proceeding"
 	#Setup working enviorment folders
 	remove-item $env:TEMP\func_CheckAndCreateITSFolders.ps1 -erroraction silentlycontinue
 	powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/func_CheckAndCreateITSFolders.ps1 -OutFile $env:TEMP\func_CheckAndCreateITSFolders.ps1"
 	powershell -exec bypass -c ". $env:TEMP\func_CheckAndCreateITSFolders.ps1; CheckAndCreateITSFolders"
 
 	#Ringcentral touches spooler driver folder for somereason - need to bypass PrintNightmare Just in case
-	Write-Host 'Bypassing Print Nightmare ACL' -ForegroundColor Green
+	write-output 'Bypassing Print Nightmare ACL'
 	$Path = "C:\Windows\System32\spool\drivers"
 	$Acl = (Get-Item $Path).GetAccessControl('Access')
 	$Ar = New-Object System.Security.AccessControl.FileSystemAccessRule("System", "Modify", "ContainerInherit, ObjectInherit", "None", "Deny")
@@ -34,9 +34,9 @@ if (-not(Test-Path $fileToCheck -PathType leaf)){
 	Invoke-WebRequest -Uri $url -OutFile $outpath
 	$wc = New-Object System.Net.WebClient
 	$wc.DownloadFile($url, $outpath)
-	Write-Host "FileSource $url"
-	Write-Host "FileDestination $outpath"
+	write-output "FileSource $url"
+	write-output "FileDestination $outpath"
 	Start-Process msiexec.exe -Wait -ArgumentList '/I "C:\itsupport\installers\RingCentral-Phone-MostRecent.msi" ALLUSERS=1 /quiet /L*V! C:\itsupport\logs\RingCentralPhone_install_log.txt'
 } else {
-	write-host "Ringcentral phone is already installed - exiting"
+	write-output "Ringcentral phone is already installed - exiting"
 }
