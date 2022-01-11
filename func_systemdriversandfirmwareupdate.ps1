@@ -52,12 +52,14 @@ if (Get-WmiObject win32_SystemEnclosure -Filter: "Manufacturer LIKE 'Dell Inc.'"
 			$results = foreach ($key in (Get-ChildItem $UninstallKeys) ) {foreach ($product in $productNames) {if ($key.GetValue("DisplayName") -like "$product") {[pscustomobject]@{KeyName = $key.Name.split('\')[-1];DisplayName = $key.GetValue("DisplayName");UninstallString = $key.GetValue("UninstallString");}}}}
 			$Guid = $results.KeyName
 			if ($guid) {
+				write-host "Found: " $Guid 
 			Start-Process msiexec.exe -Wait -ArgumentList "/X$Guid /passive"
 			}
 			
 			$results = foreach ($key in (Get-ChildItem $UninstallKeys) ) {foreach ($product in $productNames) {if ($key.GetValue("DisplayName") -like "$product") {[pscustomobject]@{KeyName = $key.Name.split('\')[-1];DisplayName = $key.GetValue("DisplayName");UninstallString = $key.GetValue("UninstallString");}}}}
 			$Guid = $results.KeyName
 			if ($guid) {
+				write-host "Found: " $Guid 
 				Start-Process msiexec.exe -Wait -ArgumentList "/X$Guid /passive"
 			}
 
@@ -67,6 +69,12 @@ if (Get-WmiObject win32_SystemEnclosure -Filter: "Manufacturer LIKE 'Dell Inc.'"
 						Get-AppxPackage | Where-Object { $_.name -eq "DellInc.DellUpdate" } | Remove-AppxPackage
 					}
 				}
+				if ($WinVersion -eq "10") {
+					if ((Get-AppxPackage | Where-Object { $_.name -eq "Dellinc.DellCommandUpdate" } | Select-Object name -expandproperty name) -eq "Dellinc.DellCommandUpdate") {
+						Get-AppxPackage | Where-Object { $_.name -eq "Dellinc.DellCommandUpdate" } | Remove-AppxPackage
+					}
+				}
+				
 				
 			write-host "downloading and Installing Dell Command Update now"
 			# Choco Install Basic Packages
