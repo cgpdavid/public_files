@@ -65,13 +65,13 @@ if (Get-WmiObject win32_SystemEnclosure -Filter: "Manufacturer LIKE 'Dell Inc.'"
 
 			$WinVersion = ([System.Environment]::OSVersion.Version).Major
 				if ($WinVersion -eq "10") {
-					if ((Get-AppxPackage | Where-Object { $_.name -eq "DellInc.DellUpdate" } | Select-Object name -expandproperty name) -eq "DellInc.DellUpdate") {
-						Get-AppxPackage | Where-Object { $_.name -eq "DellInc.DellUpdate" } | Remove-AppxPackage
+					if ((Get-AppxPackage -allusers | Where-Object { $_.name -eq "DellInc.DellUpdate" } | Select-Object name -expandproperty name) -eq "DellInc.DellUpdate") {
+						Get-AppxPackage -allusers | Where-Object { $_.name -eq "DellInc.DellUpdate" } | Remove-AppxPackage -allusers
 					}
 				}
 				if ($WinVersion -eq "10") {
-					if ((Get-AppxPackage | Where-Object { $_.name -eq "Dellinc.DellCommandUpdate" } | Select-Object name -expandproperty name) -eq "Dellinc.DellCommandUpdate") {
-						Get-AppxPackage | Where-Object { $_.name -eq "Dellinc.DellCommandUpdate" } | Remove-AppxPackage
+					if ((Get-AppxPackage -allusers | Where-Object { $_.name -eq "Dellinc.DellCommandUpdate" } | Select-Object name -expandproperty name) -eq "Dellinc.DellCommandUpdate") {
+						Get-AppxPackage -allusers | Where-Object { $_.name -eq "Dellinc.DellCommandUpdate" } | Remove-AppxPackage -allusers
 					}
 				}
 				
