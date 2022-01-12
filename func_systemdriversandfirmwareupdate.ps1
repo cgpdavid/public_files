@@ -78,11 +78,19 @@ if (Get-WmiObject win32_SystemEnclosure -Filter: "Manufacturer LIKE 'Dell Inc.'"
 				
 			write-host "downloading and Installing Dell Command Update now"
 			# Choco Install Basic Packages
-			remove-item c:\itsupport\scripts\cgp-choco-appinstall.ps1 -erroraction silentlycontinue
-			powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/cgp-choco-appinstall.ps1 -OutFile c:\itsupport\scripts\cgp-choco-appinstall.ps1; c:\itsupport\scripts\cgp-choco-appinstall.ps1"
-			SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-			C:\ProgramData\chocolatey\bin\choco install dellcommandupdate --pre --yes
-			$DcuInstallAttempt = $true
+			if (C:\ProgramData\chocolatey\bin\choco) {
+				write-host "Choco exe Detected - Skipping choco install"
+				write-host "Launching Choco packages install now"
+				C:\ProgramData\chocolatey\bin\choco install dellcommandupdate --pre --yes
+				}else {
+					write-host "Choco exe not detected - Downloading and installing it now"
+					remove-item c:\itsupport\scripts\cgp-choco-appinstall.ps1 -erroraction silentlycontinue
+					powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/cgp-choco-appinstall.ps1 -OutFile c:\itsupport\scripts\cgp-choco-appinstall.ps1; c:\itsupport\scripts\cgp-choco-appinstall.ps1"
+					SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+					$DcuInstallAttempt = $true
+					write-host "Launching Choco packages install now"
+					C:\ProgramData\chocolatey\bin\choco install dellcommandupdate --pre --yes
+					}
 			
 			write-host "Sleeping for 5 seconds to let windows catch up"
 			Start-Sleep -s 5
