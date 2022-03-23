@@ -31,6 +31,7 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 }
 }
 CheckIfRunningAsAdmin
+Writ-host "UPDATE 03-23-22 CGP-DM - Gpupdate as admin disabled for now! will only run as logged in user.
 
 $askClearPrintJobs=Read-Host "Would you like to clear Stuck printjobs? (Y/N)"
 $askPrintNightmare=Read-Host "Would you like to bypass PrintNightmare? (Y/N)"
@@ -85,8 +86,8 @@ write-host "DONE!"
 }
 
 If ($askGpupdate -eq 'Y'){
-Write-Host 'Forcing GPUPDATE as admin!' -ForegroundColor Green
-gpupdate /force
+Write-Host 'NOT Forcing GPUPDATE as admin! (DISABLED FOR NOW!)' -ForegroundColor Green
+#gpupdate /force
 
 Write-Host 'Forcing GPUPDATE as logged on user!' -ForegroundColor Green
 $ArgumentList = "/k gpupdate /force & exit"
