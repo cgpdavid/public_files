@@ -31,7 +31,7 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 }
 }
 CheckIfRunningAsAdmin
-Writ-host "UPDATE 03-23-22 CGP-DM - Gpupdate as admin disabled for now! will only run as logged in user."
+Write-host "UPDATE 03-23-22 CGP-DM - Gpupdate as admin disabled for now! will only run as logged in user."
 
 $askClearPrintJobs=Read-Host "Would you like to clear Stuck printjobs? (Y/N)"
 $askPrintNightmare=Read-Host "Would you like to bypass PrintNightmare? (Y/N)"
