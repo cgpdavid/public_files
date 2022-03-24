@@ -39,6 +39,13 @@ function CheckAndCreateITSFolders {
 		else {
 			Write-Host "Scripts Path exists"
 		}
+		if (!(Test-Path "C:\itsupport\tools\")){
+            Write-Host "Creating Tools directory"
+			New-Item -Path "C:\itsupport\" -Name "tools" -ItemType "directory"
+		}
+		else {
+			Write-Host "Tools Path exists"
+		}
 	}
 
 	catch {
