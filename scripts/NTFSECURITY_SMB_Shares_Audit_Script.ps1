@@ -1,9 +1,10 @@
 <#
 #USAGE
 
-#NTFSECURITY_SMB_Shares_Audit_Script.ps1
+#NTFSECURITY_SMB_Shares_Audit_Script.ps1 - Github has TLS issues with older servers. Might need to manually download and run on server.
 remove-item $env:TEMP\NTFSECURITY_SMB_Shares_Audit_Script.ps1 -erroraction silentlycontinue
-powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/scripts/NTFSECURITY_SMB_Shares_Audit_Script.ps1 -OutFile $env:TEMP\NTFSECURITY_SMB_Shares_Audit_Script.ps1"
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls -bor [Net.SecurityProtocolType]::Tls11 -bor [Net.SecurityProtocolType]::Tls12
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/scripts/NTFSECURITY_SMB_Shares_Audit_Script.ps1 -OutFile $env:TEMP\NTFSECURITY_SMB_Shares_Audit_Script.ps1" 
 powershell -exec bypass -c ". $env:TEMP\NTFSECURITY_SMB_Shares_Audit_Script.ps1;"
 
 #>
@@ -61,15 +62,15 @@ color:#6D7B8D;
 function InstallModuleNTFSSecurity {
 	install-module "NTFSSecurity" -Force; import-module "NTFSSecurity"
 	If(Get-Module -ListAvailable -Name "NTFSSecurity") {
-		write-host "NTFSSecurity Module not found!"
+		write-host "NTFSSecurity Module not found!" -ForegroundColor yellow
 		write-host "Trying to install package using Powershell gallery through install-module"
 		Install-Module -Name NTFSSecurity
 	}
 	Else{
-		write-host "Error - Could not import. Manually installing NTFSSecurity"
+		write-host "Error! Could not import automatically. Manually installing NTFSSecurity" -ForegroundColor yellow
 		$TempPath = "C:\itsupport\temp\"
 		if (!(Test-Path $TempPath)){
-			Write-Host "Creating Reports directory"
+			Write-Host "Creating temp directory"
 			New-Item -ItemType "directory" -Path $TempPath 
 		}
 		Invoke-WebRequest -Uri "https://www.powershellgallery.com/api/v2/package/NTFSSecurity/" -OutFile $TempPath\NTFSSecurity_latest.zip
@@ -80,12 +81,11 @@ function InstallModuleNTFSSecurity {
 		$version = $XmlDocument.coreProperties.version
 		Move-Item -Path $TempPath\NTFSSecurity_latest\ -Destination $TempPath\$version
 		if (!(Test-Path $env:ProgramFiles\WindowsPowerShell\Modules\NTFSSecurity)){
-			Write-Host "Creating Reports directory"
 			New-Item -ItemType "directory" -Path $env:ProgramFiles\WindowsPowerShell\Modules\NTFSSecurity
 		}
 		Move-Item -Path $TempPath\$version -Destination $env:ProgramFiles\WindowsPowerShell\Modules\NTFSSecurity
 		write-host "Done processing manual install - Attempting module import now"
-		If(Get-Module -ListAvailable -Name "NTFSSecurity") {Import-module "NTFSSecurity";write-host "Detected moving along!";} Else {write-host "COULD NOT INSTALL MODULE, EXITING!!!!!";Break ;}
+		If(Get-Module -ListAvailable -Name "NTFSSecurity") {Import-module "NTFSSecurity";write-host "Success! Module Detected! moving along!" -ForegroundColor GREEN;} Else {write-host "ERROR! COULD NOT INSTALL NTFSSecurity MODULE, EXITING!!!!!" -BackgroundColor red -ForegroundColor yellow;Break ;}
 		
 	}
 }
@@ -93,27 +93,31 @@ function InstallModuleNTFSSecurity {
 $timestamp = $(get-date -f yyyy-MM-dd_HH-mm-ss)
 $FolderPath = "C:\itsupport\reports\smb_share_ntfs_audit_" + $timestamp 
 if (!(Test-Path $FolderPath)){
-	Write-Host "Creating Reports directory"
+	Write-Host "Creating report directory"
 	New-Item -ItemType "directory" -Path $FolderPath
 }
 
 If(Get-Module -ListAvailable -Name "NTFSSecurity") {Import-module "NTFSSecurity"} Else { InstallModuleNTFSSecurity}
-write-host "NTFSSecurity Module detecting - Continuing"
-write-host "Running reports now - This may take some time!"
+write-host "NTFSSecurity Module detected - Continuing" -ForegroundColor GREEN
+write-host "Running reports now - This may take several minutes on servers with many shares!" 
 $AllsmbShares = get-smbshare | Where-Object {(@('Remote Admin','Default share','Remote IPC') -notcontains $_.Description)}
 foreach($SMBShare in $AllSMBShares){
 $Permissions = get-item $SMBShare.path | get-ntfsaccess
 $Permissions += get-childitem -Depth $RecursiveDepth -Recurse $SMBShare.path | get-ntfsaccess
 $FullAccess = $permissions | where-object {$_.'AccessRights' -eq "FullControl" -AND $_.IsInherited -eq $false -AND $_.'AccessControlType' -ne "Deny"}| Select-Object FullName,Account,AccessRights,AccessControlType  | ConvertTo-Html -PreContent "<h1>Full Access</h1>" -Fragment | Out-String
-$Modify = $permissions | where-object {$_.'AccessRights' -Match "Modify" -AND $_.IsInherited -eq $false -and $_.'AccessControlType' -ne "Deny"}| Select-Object FullName,Account,AccessRights,AccessControlType  | ConvertTo-Html "<h1>Modify</h1>"  -Fragment | Out-String
-$ReadOnly = $permissions | where-object {$_.'AccessRights' -Match "Read" -AND $_.IsInherited -eq $false -and $_.'AccessControlType' -ne "Deny"}| Select-Object FullName,Account,AccessRights,AccessControlType  | ConvertTo-Html "<h1>Read Only</h1>" -Fragment | Out-String
-$Deny =   $permissions | where-object {$_.'AccessControlType' -eq "Deny" -AND $_.IsInherited -eq $false} | Select-Object FullName,Account,AccessRights,AccessControlType | ConvertTo-Html -Fragment "<h1>Deny</h1>" | Out-String
+$Modify = $permissions | where-object {$_.'AccessRights' -Match "Modify" -AND $_.IsInherited -eq $false -and $_.'AccessControlType' -ne "Deny"}| Select-Object FullName,Account,AccessRights,AccessControlType  | ConvertTo-Html -PreContent "<h1>Modify</h1>"  -Fragment | Out-String
+$ReadOnly = $permissions | where-object {$_.'AccessRights' -Match "Read" -AND $_.IsInherited -eq $false -and $_.'AccessControlType' -ne "Deny"}| Select-Object FullName,Account,AccessRights,AccessControlType  | ConvertTo-Html -PreContent "<h1>Read Only</h1>" -Fragment | Out-String
+$Deny =   $permissions | where-object {$_.'AccessControlType' -eq "Deny" -AND $_.IsInherited -eq $false} | Select-Object FullName,Account,AccessRights,AccessControlType | ConvertTo-Html -PreContent "<h1>Deny</h1>" -Fragment | Out-String
 $PermCSV = $Permissions | ConvertTo-Csv -Delimiter "," | out-file "$FolderPath\ExportOfPermissions.csv" -append
 $head,$FullAccess,$Modify,$ReadOnly,$Deny | Out-File "$FolderPath\$($SMBShare.name).html"
 }
-write-host "Done!"
+write-host "Done!" -ForegroundColor GREEN
+$foldersizeRaw = "{0:N2} MB" -f ((gci $FolderPath | measure Length -s).sum / 1Mb)
+write-host "Reports total raw filesize: " $foldersizeRaw
 write-host "Compressing reports into Zip file at "
 write-host $FolderPath\ZIP_smb_share_ntfs_audit_$timestamp
 Compress-Archive -Path $FolderPath -DestinationPath $FolderPath\ZIP_smb_share_ntfs_audit_$timestamp
-write-host "Done compressing. Trying to navigate to the path above."
+$foldersizeCompressed =  "{0:N2} MB" -f ((gci $FolderPath\ZIP_smb_share_ntfs_audit_$timestamp.zip | measure Length -s).sum / 1Mb)
+write-host "Done compressing. Filesize compressed: " $foldersizeCompressed
+write-host "Launching explorer to the report path."
 explorer.exe $FolderPath
