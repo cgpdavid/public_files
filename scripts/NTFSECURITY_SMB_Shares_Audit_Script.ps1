@@ -108,7 +108,7 @@ $FullAccess = $permissions | where-object {$_.'AccessRights' -eq "FullControl" -
 $Modify = $permissions | where-object {$_.'AccessRights' -Match "Modify" -AND $_.IsInherited -eq $false -and $_.'AccessControlType' -ne "Deny"}| Select-Object FullName,Account,AccessRights,AccessControlType  | ConvertTo-Html -PreContent "<h1>Modify</h1>"  -Fragment | Out-String
 $ReadOnly = $permissions | where-object {$_.'AccessRights' -Match "Read" -AND $_.IsInherited -eq $false -and $_.'AccessControlType' -ne "Deny"}| Select-Object FullName,Account,AccessRights,AccessControlType  | ConvertTo-Html -PreContent "<h1>Read Only</h1>" -Fragment | Out-String
 $Deny =   $permissions | where-object {$_.'AccessControlType' -eq "Deny" -AND $_.IsInherited -eq $false} | Select-Object FullName,Account,AccessRights,AccessControlType | ConvertTo-Html -PreContent "<h1>Deny</h1>" -Fragment | Out-String
-$PermCSV = $Permissions | ConvertTo-Csv -Delimiter "," | out-file "$FolderPath\ExportOfPermissions.csv" -append
+$PermCSV = $Permissions | Export-Csv -Path $FolderPath\ExportOfPermissions.csv -NoTypeInformation -append | % {$_ -replace '"',''}
 $head,$FullAccess,$Modify,$ReadOnly,$Deny | Out-File "$FolderPath\$($SMBShare.name).html"
 }
 write-host "Done!" -ForegroundColor GREEN
