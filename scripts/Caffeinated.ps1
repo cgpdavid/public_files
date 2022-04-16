@@ -4,6 +4,12 @@
 remove-item $env:TEMP\Caffeinated.ps1 -erroraction silentlycontinue
 powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/scripts/Caffeinated.ps1 -OutFile $env:TEMP\Caffeinated.ps1"
 powershell -exec bypass -c ". $env:TEMP\Caffeinated.ps1"
+
+#NOTES
+# CURRENTLY Configured to create a service as system
+# If you would like this service to run AS the user creating the task, the user must be logged in at the time of execution (so it wont work for other users of same PC)
+# Just uncomment the #$principal line and comment or delete the $principal below it.
+
 #>
 
 
@@ -19,9 +25,10 @@ function Add-ScheduledTask
     $action = New-ScheduledTaskAction -Execute $execute -Argument $argument
     $trigger = New-ScheduledTaskTrigger -AtLogOn
     $userId = "$env:userdomain\$env:username"
-    $principal = New-ScheduledTaskPrincipal -UserId $userId -RunLevel Highest -LogonType Interactive
+    #$principal = New-ScheduledTaskPrincipal -UserId $userId -RunLevel Highest -LogonType Interactive
+	$principal = New-ScheduledTaskPrincipal -UserID "NT AUTHORITY\SYSTEM" -RunLevel Highest -LogonType ServiceAccount
     $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -Compatibility Win8
-    $task = New-ScheduledTask -Action $action -Principal $principal -Trigger $trigger -Settings $settings
+	$task = New-ScheduledTask -Action $action -Principal $principal -Trigger $trigger -Settings $settings
     Register-ScheduledTask -TaskName $taskName -InputObject $task -Force | Out-Null
 
     if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue)
