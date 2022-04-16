@@ -2,7 +2,7 @@
 #USAGE
 #Caffeinated
 remove-item $env:TEMP\Caffeinated.ps1 -erroraction silentlycontinue
-powershell -exec bypass -c "Invoke-WebRequest https://github.com/cgpdavid/public_files/new/main/scripts/Caffeinated.ps1 -OutFile $env:TEMP\Caffeinated.ps1"
+powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/scripts/Caffeinated.ps1 -OutFile $env:TEMP\Caffeinated.ps1"
 powershell -exec bypass -c ". $env:TEMP\Caffeinated.ps1"
 #>
 
