@@ -6,7 +6,7 @@ param (
     [Parameter(Position=1,mandatory=$true)]
     [string]$username
     [Parameter(Position=2,mandatory=$true)]
-    [string]$password
+    [string]$password)
 )
 
 if(-not($username)) { Throw “The Username has not been defined!” }
