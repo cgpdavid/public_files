@@ -2,11 +2,11 @@ function JoinToDomain {
 param (
     [CmdletBinding()]
     [Parameter(Position=0,mandatory=$true)]
-    [string]$DomainJoinDomain
+    [string]$DomainJoinDomain,
     [Parameter(Position=1,mandatory=$true)]
-    [string]$username
+    [string]$username,
     [Parameter(Position=2,mandatory=$true)]
-    [string]$password)
+    [string]$password
 )
 
 if(-not($username)) { Throw “The Username has not been defined!” }
