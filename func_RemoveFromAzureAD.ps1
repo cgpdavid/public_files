@@ -9,12 +9,12 @@ powershell -exec bypass -c ". $env:TEMP\func_RemoveFromAzureAD.ps1; RemoveFromAz
 #>
 
 function RemoveFromAzureAD {
-if (Get-Module -ListAvailable -Name SomeModule) {
+if (Get-Module -ListAvailable -Name InvokeAsSystem) {
     Write-Host "InvokeAsSystem Module exists"
 } 
 else {
     Write-Host "InvokeAsSystem Module does not exist, installing"
-    Install-Module -Name InvokeAsSystem -Force
+    Install-Module -Name InvokeAsSystem -Confirm:$False -Force
 }
 	
 	$dsreg = dsregcmd.exe /status
