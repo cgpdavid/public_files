@@ -14,6 +14,7 @@ if (Get-Module -ListAvailable -Name InvokeAsSystem) {
 } 
 else {
     Write-Host "InvokeAsSystem Module does not exist, installing"
+	Install-PackageProvider -Name NuGet -Confirm:$False -Force
     Install-Module -Name InvokeAsSystem -Confirm:$False -Force
 }
 	
