@@ -33,6 +33,13 @@ write-host "Done"
 
 #Delete office tiles in start menu
 write-host "Removing some office tiles in start menu"
+write-host "This may throw some red errors, these are fine and can be ignored!"
+write-host "This may throw some red errors, these are fine and can be ignored!"
+write-host "This may throw some red errors, these are fine and can be ignored!"
+write-host "This may throw some red errors, these are fine and can be ignored!"
+write-host "This may throw some red errors, these are fine and can be ignored!"
+write-host "This may throw some red errors, these are fine and can be ignored!"
+write-host "This may throw some red errors, these are fine and can be ignored!"
 Get-appxpackage -allusers *Microsoft.MicrosoftOfficeHub* | Remove-AppxPackage -allusers
 Get-appxprovisionedpackage -online | where-object {$_.packagename -like '*Microsoft.MicrosoftOfficeHub*'} | remove-appxprovisionedpackage -online -allusers
 Get-appxpackage -allusers *onenote* | Remove-AppxPackage -allusers
