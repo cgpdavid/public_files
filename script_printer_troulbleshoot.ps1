@@ -1,20 +1,23 @@
 <#
-#USAGE
+.Synopsis
+   CGP Print Nightmare(s) bypass script
 
-#script_printer_troulbleshoot
-remove-item $env:TEMP\script_printer_troulbleshoot.ps1 -erroraction silentlycontinue
-powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/script_printer_troulbleshoot.ps1 -OutFile $env:TEMP\script_printer_troulbleshoot.ps1"
-powershell -exec bypass -c ". $env:TEMP\script_printer_troulbleshoot.ps1"
+.DESCRIPTION
+   This is an unnoficial and unsupported script written by David @ CGP
+
+.EXAMPLE
+   #script_printer_troulbleshoot
+   remove-item $env:TEMP\script_printer_troulbleshoot.ps1 -erroraction silentlycontinue
+   powershell -exec bypass -c "Invoke-WebRequest https://raw.githubusercontent.com/cgpdavid/public_files/main/script_printer_troulbleshoot.ps1 -OutFile $env:TEMP\script_printer_troulbleshoot.ps1"
+   powershell -exec bypass -c ". $env:TEMP\script_printer_troulbleshoot.ps1"
 
 #>
-
-
 
 
 do {
 Write-Host 'CGP PRINT TROUBLESHOOTING SCRIPT'
 ''
-$askContinue=Read-Host "Continue running this script on $env:computername ? (Y/N)"
+$askContinue=Read-Host "Continue running this script on $env:computername ? (y/N)"
 
 ''
 If ($askContinue -eq 'Y')
@@ -31,13 +34,14 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 }
 }
 CheckIfRunningAsAdmin
-Write-host "UPDATE 03-23-22 CGP-DM - Gpupdate as admin disabled for now! will only run as logged in user."
+Write-host "NOTES:"
+Write-host "03-23-22 CGP-DM - Gpupdate as admin disabled for now! will only run as logged in user.`n "
 
-$askClearPrintJobs=Read-Host "Would you like to clear Stuck printjobs? (Y/N)"
-$askPrintNightmare=Read-Host "Would you like to bypass PrintNightmare? (Y/N)"
-$askBypassMsKB1=Read-Host "Would you like to bypass Microsoft printing as admin KB5005033? (Y/N)"
-$askBypassMsKB2=Read-Host "Would you like to bypass Microsoft printing as admin KB5005565? (Y/N)"
-$askGpupdate=Read-Host "Would you like to gpupdate /force as the last step? (Y/N)"
+$askClearPrintJobs=Read-Host "Would you like to clear Stuck printjobs? (y/N)"
+$askPrintNightmare=Read-Host "Would you like to bypass PrintNightmare? (y/N)"
+$askBypassMsKB1=Read-Host "Would you like to bypass Microsoft printing as admin KB5005033? (y/N)"
+$askBypassMsKB2=Read-Host "Would you like to bypass Microsoft printing as admin KB5005565? (y/N)"
+$askGpupdate=Read-Host "Would you like to gpupdate /force as the last step? (y/N)"
 
 
 
