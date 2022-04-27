@@ -1,6 +1,7 @@
 <#
 .Synopsis
    CGP Print Nightmare(s) bypass script
+   This script will be updated to also include fixes for other printer related problems that we encounter.
 
 .DESCRIPTION
    This is an unnoficial and unsupported script written by David @ CGP
